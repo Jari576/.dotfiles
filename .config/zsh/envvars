@@ -1,0 +1,32 @@
+#!/bin/sh
+
+typeset -U PATH path
+
+path=("$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.local/bin" "$HOME/go/bin" "/home/jari/.deno/bin" "$path[@]")
+export PATH
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+
+if [ -n “$SSH_TTY” ]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
+
+export STARSHIP_CONFIG=~/.config/starship/config.toml
+
+PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins
+fpath=($PLUGINS_DIRECTORY $fpath)
+
+if [ -x "$(command -v nvim)" ]; then
+    export EDITOR="nvim"
+fi
+
+LF_ICONS=$(sed ~/.config/lf/diricons \
+        -e '/^[ \t]*#/d'       \
+        -e '/^[ \t]*$/d'       \
+        -e 's/[ \t]\+/=/g'     \
+        -e 's/$/ /')
+LF_ICONS=${LF_ICONS//$'\n'/:}
+export LF_ICONS
+

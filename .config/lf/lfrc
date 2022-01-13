@@ -1,0 +1,88 @@
+# Basic settings
+set shell zsh
+set drawbox on
+set scrolloff 20
+set tabstop 4
+
+# Show info
+set hidden on
+set number on
+set relativenumber on
+set info size:time
+set icons
+
+# Previewer
+set preview on
+set previewer ~/.config/lf/previewer
+set cleaner ~/.config/lf/cleaner
+
+# Search settings
+set anchorfind off
+set incsearch on
+set incfilter on
+set globsearch on
+set ignorecase on
+set smartcase on
+set ignoredia on
+set smartdia on
+set wrapscan on
+set findlen 1
+
+# Unarchive function
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+cmd fzf_jump ${{
+    previewer='$lf_previewer {} $FZF_PREVIEW_COLUMNS $FZF_PREVIEW_LINES $(($COLUMNS - $FZF_PREVIEW_COLUMNS)) $(($LINES - $FZF_PREVIEW_LINES))'
+    if [[ -v $1 ]]; then;
+        res="$(find . -maxdepth $1 | fzf --reverse --exact --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    else
+        res="$(find . | fzf --reverse --exact --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    fi
+
+    if [ -d "$res" ]; then
+        cmd="cd"
+    else 
+        cmd="select"                                                       
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd editSudoOrNot ${{
+    if [[ -w $f ]]; then
+        $EDITOR $f 
+    else
+        sudoedit $f
+    fi
+}}
+
+# Keymaps
+map <enter> shell
+map sn :set sortby natural
+map ss :set sortby size
+map st :set sortby time
+map sa :set sortby atime
+map sc :set sortby ctime
+map e :editSudoOrNot
+map az zip
+map at tar
+map ag targz
+map ab tarbz2
+map au unarchive
+map <c-f> :fzf_jump
+map <c-j> :fzf_jump 1
+map <delete> :delete
+map <c-e> :$$EDITOR .
+

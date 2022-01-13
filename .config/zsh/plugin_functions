@@ -1,0 +1,62 @@
+#!/bin/sh
+
+function source_if_exists () {
+    [ -f "$1" ] && source $1
+}
+
+function zsh_add_plugin () {
+    PLUGIN_NAME=${1##*/}
+    PLUG_DIR=$PLUGINS_DIRECTORY/$1
+    if [ ! -d "$PLUG_DIR" ]; then
+        git clone "https://github.com/$1.git" "$PLUG_DIR" 
+        reset_completions
+    fi
+    fpath+=$PLUG_DIR 
+    source_if_exists "$PLUG_DIR/$PLUGIN_NAME.plugin.zsh" || source_if_exists "$PLUG_DIR/$PLUGIN_NAME.zsh" || source_if_exists "$PLUG_DIR/$PLUGIN_NAME.zsh-theme" 
+}
+
+function zsh_remove_plugin () {
+    PLUG_DIR=$PLUGINS_DIRECTORY/$1
+    PARENT_DIR=${PLUG_DIR%/*}
+    rm -rf $PLUG_DIR
+    [ "$(ls -A $PARENT_DIR)" ] || rm -rf $PARENT_DIR
+    reset_completions
+}
+
+function zsh_add_plugins_from_file () {
+    while read -r plugin; do
+        zsh_add_plugin $plugin
+    done < $1
+}
+
+function zsh_remove_plugins_not_in_file () {
+    for f in $PLUGINS_DIRECTORY/*/*; do
+	    PLUGIN=${f##$PLUGINS_DIRECTORY/}
+	    grep -Fxq $PLUGIN $1 || zsh_remove_plugin $PLUGIN
+    done
+}
+
+function zsh_sync_plugins_with_file () {
+    zsh_add_plugins_from_file $1
+    zsh_remove_plugins_not_in_file $1
+}
+
+function zsh_update_plugin () { 
+    REPO=$PLUGINS_DIRECTORY/$1
+    [ -z "$(git diff remotes/origin/HEAD)" ] && return
+    git -C $REPO reset --hard
+    git -C $REPO clean -dxf
+    git -C $REPO pull
+    reset_completions
+}
+
+function reset_completions () {
+   rm -f $ZDOTDIR/.zcompdump
+}
+
+function zsh_update_installed_plugins () {
+    for f in $PLUGINS_DIRECTORY/*/*; do 
+	    zsh_update_plugin ${f##$PLUGINS_DIRECTORY/}
+    done
+}
+

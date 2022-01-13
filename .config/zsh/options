@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# colors
+autoload -Uz colors && colors
+zle_highlight=('paste:none')
+
+unsetopt CASE_GLOB
+setopt AUTOCD EXTENDED_GLOB NOMATCH menucomplete
+setopt INTERACTIVE_COMMENTS
+
+# history settings
+setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+HISTFILE="$ZDOTDIR/.zhistory"
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# remove beep sound for errors
+unsetopt BEEP
+
+# correction 
+setopt HASH_LIST_ALL
+setopt CORRECT
+

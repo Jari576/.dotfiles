@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# easy config editing
+alias nvimrc=$EDITOR' ~/.config/nvim/'
+alias zshrc=$EDITOR' ~/.config/zsh/'
+
+# paru aliases
+if [ -x "$(command -v paru)" ]; then
+    alias p='paru'
+    alias psyu='paru -Syu'
+    alias psyuu='paru -Syuu'
+    alias ps='paru -S'
+    alias pss='paru -Ss'
+fi
+
+# get fastest mirrors
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+
+# pipe to 'clip' to copy output
+alias clip='xclip -selection clipboard'
+
+# Paste clipboard content to selected window
+alias pasteto='xclip -selection clipboard -out | tr \\n \\r | xdotool selectwindow windowfocus type --clearmodifiers --delay 25 --window %@ --file -'
+
+# tf2 folder
+alias tf2map='cd ~/.local/share/Steam/steamapps/common/Team\ Fortress\ 2/tf'
+
+# remapping core utils to better alternatives
+alias vim=$EDITOR
+alias cat='bat'
+alias ls='exa -al'
+
+# kitty ssh
+alias ssh='kitty +kitten ssh'
+

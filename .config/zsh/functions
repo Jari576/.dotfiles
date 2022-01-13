@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# add, commit and push
+function send () {
+    git add -A
+    git commit -m "$1" || git commit && git push
+}
+
+# terminal spotify client
+function spot () {
+    # launch spotifyd if it's not running
+    [ "$(pgrep "spotifyd")" ] || spotifyd
+    spt
+}
+
+function fuzPac () {
+    paru -Sl | awk '{print $1 $2 ($4=="" ? "" : " *")}' | fzf --border --multi --exact --no-sort --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
+}
+
+##################################
+############ modules #############
+##################################
+function lfcd () {
+    zle reset-prompt
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+    zle reset-prompt
+}
+zle -N lfcd
+
+function fzfcd () {
+    previewer='~/.config/lf/previewer {} $FZF_PREVIEW_COLUMNS $FZF_PREVIEW_LINES $(($COLUMNS - $FZF_PREVIEW_COLUMNS)) $(($LINES - $FZF_PREVIEW_LINES))'
+    res=$(find . | fzf --exact --reverse --preview=${previewer})
+    if [ -d "$res" ]; then
+        cd "$res"
+    elif [ -e "$res" ]; then
+        cd "$(dirname $res)"
+    fi
+    zle reset-prompt
+}
+zle -N fzfcd
+
+function editCurDir () {
+    $EDITOR .    
+}
+zle -N editCurDir
+
+##################################
+############# hooks $#############
+##################################
+# set tab name
+function setTerm () {
+    [[ -t 1 ]] || return
+    case $TERM in
+      sun-cmd) print -Pn "\e]l$1\e\\"
+        ;;
+      *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;$1\a"
+        ;;
+    esac
+}
+
+function setTermCurrentDir () {
+    setTerm %~
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec setTerm
+add-zsh-hook chpwd setTermCurrentDir
+add-zsh-hook precmd setTermCurrentDir
+
