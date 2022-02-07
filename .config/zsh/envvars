@@ -9,11 +9,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CACHE_HOME=$HOME/.cache
 
-# SSH Agent
-if [ -n “$SSH_TTY” ]; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-fi
-
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 
 PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins

@@ -13,7 +13,7 @@ source "$ZDOTDIR/completion"
 source "$ZDOTDIR/keybinds"
 
 eval "$(starship init zsh)"
-
+eval $(keychain --eval --quiet --confhost)
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
