@@ -13,15 +13,20 @@ function spot () {
     spt
 }
 
-function fuzPac () {
-    paru -Sl | awk '{print $1 $2 ($4=="" ? "" : " *")}' | fzf --border --multi --exact --no-sort --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
+function toggleParuInstalled () {
+    paru -Rp $1 &> /dev/null && paru -Rnsuvc $1 && return
+    paru -Si $1 &> /dev/null && paru -S $1 && return
+    echo "package named ${1} not found"
 }
 
-##################################
+function fuzpac () {
+    paru -${1-S}l | fzf --bind 'enter:execute(source ~/.config/zsh/functions && toggleParuInstalled {2})+reload(paru -${1-S}l)' --border --no-sort --ansi --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
+}
+
+#################################
 ############ modules #############
 ##################################
 function lfcd () {
-    zle reset-prompt
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
@@ -34,6 +39,7 @@ function lfcd () {
 zle -N lfcd
 
 function fzfcd () {
+    setTerm "fzfcd (%~)"
     previewer='~/.config/lf/previewer {} $FZF_PREVIEW_COLUMNS $FZF_PREVIEW_LINES $(($COLUMNS - $FZF_PREVIEW_COLUMNS)) $(($LINES - $FZF_PREVIEW_LINES))'
     res=$(find . | fzf --exact --reverse --preview=${previewer})
     if [ -d "$res" ]; then

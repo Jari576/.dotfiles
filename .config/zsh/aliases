@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # easy config editing
 alias nvimrc=$EDITOR' ~/.config/nvim/'
@@ -6,11 +6,10 @@ alias zshrc=$EDITOR' ~/.config/zsh/'
 
 # paru aliases
 if [ -x "$(command -v paru)" ]; then
-    alias p='paru'
+    alias p='fuzpac'
     alias psyu='paru -Syu'
-    alias psyuu='paru -Syuu'
     alias ps='paru -S'
-    alias pss='paru -Ss'
+    alias pss='fuzpac'
 fi
 
 # get fastest mirrors
