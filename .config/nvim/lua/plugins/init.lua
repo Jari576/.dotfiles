@@ -75,6 +75,9 @@ return packer.startup(function(use)
 	-- file manager
 	use({
 		"kyazdani42/nvim-tree.lua",
+		requires = {
+			"kyazdani42/nvim-web-devicons", -- optional, for file icon
+		},
 		config = get_config("tree"),
 	})
 
@@ -177,7 +180,11 @@ return packer.startup(function(use)
 	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { {"nvim-telescope/telescope-fzf-native.nvim", run = 'make'}, { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+		requires = {
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
 		config = get_config("telescope"),
 	})
 
@@ -219,14 +226,18 @@ return packer.startup(function(use)
 	})
 
 	use({
-        "stevearc/dressing.nvim",
-        config = get_config("dressing")
-    })
+		"stevearc/dressing.nvim",
+		config = get_config("dressing"),
+	})
 
-    use({
-        "sunjon/Shade.nvim",
-        config = get_config("shade")
-    })
+	use({
+		"sunjon/Shade.nvim",
+		config = get_config("shade"),
+	})
+
+	use({
+		"nvim-treesitter/nvim-tree-docs",
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

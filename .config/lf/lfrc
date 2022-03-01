@@ -62,9 +62,9 @@ cmd fzf_jump ${{
 
 cmd editSudoOrNot ${{
     if [[ -w $f ]]; then
-        $EDITOR $f 
+        $EDITOR "$f" 
     else
-        sudoedit $f
+        sudoedit "$f"
     fi
 }}
 
@@ -90,7 +90,7 @@ map az zip
 map at tar
 map ag targz
 map ab tarbz2
-map au unarchive
+map ua unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
 map <delete> :delete

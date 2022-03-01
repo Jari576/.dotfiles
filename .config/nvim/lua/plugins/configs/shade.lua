@@ -1,4 +1,3 @@
-
 local status_ok, shade = pcall(require, "shade")
 if not status_ok then
     vim.notify("shade not loaded", "error")
