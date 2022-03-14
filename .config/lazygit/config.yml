@@ -30,7 +30,7 @@ gui:
   skipStashWarning: true
   showFileTree: true # for rendering changes files in a tree format
   showListFooter: true # for seeing the '5 of 20' message in list panels
-  showRandomTip: true
+  showRandomTip: false
   showCommandLog: true
   commandLogSize: 8
 git:
@@ -71,7 +71,7 @@ update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often an update is checked for
 reporting: 'undetermined' # one of: 'on' | 'off' | 'undetermined'
-confirmOnQuit: true
+confirmOnQuit: false
 # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
 quitOnTopLevelReturn: false
 disableStartupPopups: true

@@ -6,10 +6,10 @@ alias zshrc=$EDITOR' ~/.config/zsh/'
 
 # paru aliases
 if [ -x "$(command -v paru)" ]; then
-    alias p='fuzpac'
-    alias psyu='paru -Syu'
-    alias ps='paru -S'
-    alias pss='fuzpac'
+    alias p="paru -Sl | fuzpac"
+    alias psyu="paru -Syu"
+    alias ps="paru -S"
+    alias pss="paru -Sl | fuzpac"
 fi
 
 # get fastest mirrors
@@ -26,6 +26,7 @@ alias tf2map='cd ~/.local/share/Steam/steamapps/common/Team\ Fortress\ 2/tf'
 
 # remapping core utils to better alternatives
 alias vim=$EDITOR
+alias v=$EDITOR
 [ -x "$(command -v bat)" ] && alias cat='bat'
 [ -x "$(command -v exa)" ] && alias ls='exa -al'
 alias mkdir='mkdir -pv'

@@ -20,6 +20,7 @@ telescope.setup {
                 ["<C-k>"] = actions.move_selection_previous,
 
                 ["<C-c>"] = actions.close,
+                ["<C-q>"] = actions.close,
 
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
@@ -37,13 +38,12 @@ telescope.setup {
 
                 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
                 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key -- keys from pressing <C-/>
             },
             n = {
                 ["<esc>"] = actions.close,
+                ["q"] = actions.close,
                 ["<CR>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
@@ -76,13 +76,9 @@ telescope.setup {
         }
     },
     pickers = {
-        -- Default configuration for builtin pickers goes here:
-        -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
+        current_buffer_fuzzy_find = {
+            theme = "ivy"
+        }
     },
     extensions = {
         -- Your extension configuration goes here:
@@ -91,12 +87,15 @@ telescope.setup {
         -- }
         -- please take a look at the readme of the extension you want to configure
         fzf = {
-            fuzzy = false,
+            fuzzy = true,
             override_generic_sorter = true,
             override_file_sorter = true,
             case_mode = "smart_case",
-        }
+        },
     }
 }
 
 telescope.load_extension('fzf')
+telescope.load_extension('zoxide')
+telescope.load_extension('neoclip')
+telescope.load_extension('env')

@@ -81,14 +81,23 @@ return packer.startup(function(use)
 		config = get_config("tree"),
 	})
 
+	-- visualize cursor jumps
+	use({
+		"edluffy/specs.nvim",
+		config = get_config("specs"),
+	})
+
+	use({
+		"Pocco81/AutoSave.nvim",
+		config = get_config("autosave"),
+	})
+
 	-- Tab bar
 	use({
 		"akinsho/bufferline.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("bufferline"),
 	})
-
-	-- Close tabs
-	use("moll/vim-bbye")
 
 	-- Lualine
 	use({
@@ -123,15 +132,16 @@ return packer.startup(function(use)
 	})
 
 	use({
-		"goolord/alpha-nvim",
-		config = get_config("alpha"),
+		"luukvbaal/stabilize.nvim",
+		config = get_config("stabilize"),
 	})
 
-	--   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
 	use({
 		"folke/which-key.nvim",
 		config = get_config("which-key"),
 	})
+
+	use("moll/vim-bbye")
 
 	-- Colorschemes
 	use("lunarvim/colorschemes") -- A bunch of colorschemes you can try out
@@ -166,10 +176,22 @@ return packer.startup(function(use)
 		requires = {
 			{ "neovim/nvim-lspconfig" },
 			{ "hrsh7th/cmp-nvim-lsp", opt = true },
+			{ "b0o/schemastore.nvim" },
 		},
 		config = get_config("lsp-installer"),
 	})
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = get_config("lsp_signature"),
+	})
+	use({
+		"tamago324/nlsp-settings.nvim",
+		config = get_config("nlsp-settings"),
+	}) -- language server settings defined in json for
+	use({
+		"j-hui/fidget.nvim",
+		config = get_config("fidget"),
+	})
 
 	-- for formatters and linters
 	use({
@@ -187,6 +209,16 @@ return packer.startup(function(use)
 		},
 		config = get_config("telescope"),
 	})
+	use({ "LinArcX/telescope-env.nvim" })
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "tami5/sqlite.lua", module = "sqlite" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = get_config("neoclip"),
+	})
+	use({ "jvgrootveld/telescope-zoxide" })
 
 	-- Treesitter
 	use({
@@ -194,11 +226,15 @@ return packer.startup(function(use)
 		run = ":TSUpdate",
 		config = get_config("treesitter"),
 	})
-
 	use({
-		"JoosepAlviste/nvim-ts-context-commentstring",
+		"windwp/nvim-ts-autotag",
 		requires = { "nvim-treesitter/nvim-treesitter" },
-		config = get_config("treesitter"),
+		config = get_config("ts-autotag"),
+	})
+	use({
+		"romgrk/nvim-treesitter-context",
+		requires = { "nvim-treesitter/nvim-treesitter" },
+		config = get_config("treesitter-context"),
 	})
 
 	-- Easily comment stuff
@@ -227,6 +263,7 @@ return packer.startup(function(use)
 
 	use({
 		"stevearc/dressing.nvim",
+		requires = { "MunifTanjim/nui.nvim" },
 		config = get_config("dressing"),
 	})
 
@@ -238,6 +275,31 @@ return packer.startup(function(use)
 	use({
 		"nvim-treesitter/nvim-tree-docs",
 	})
+
+	use({
+		"petertriho/nvim-scrollbar",
+		config = get_config("scrollbar"),
+	})
+
+	use({
+		"danymat/neogen",
+		config = get_config("neogen"),
+		requires = { "nvim-treesitter/nvim-treesitter" },
+		-- Uncomment next line if you want to follow only stable versions
+		-- tag = "*"
+	})
+
+	use({
+		"rlane/pounce.nvim",
+		config = get_config("pounce"),
+	})
+
+	use({
+		"folke/persistence.nvim",
+		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		module = "persistence",
+		config = get_config("persistence")
+    })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

@@ -20,7 +20,7 @@ function toggleParuInstalled () {
 }
 
 function fuzpac () {
-    paru -${1-S}l | fzf --bind 'enter:execute(source ~/.config/zsh/functions && toggleParuInstalled {2})+reload(paru -${1-S}l)' --exact --border --no-sort --ansi --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
+    fzf --bind 'enter:execute(source ~/.config/zsh/functions && toggleParuInstalled {2})+reload(paru -${1-S}l)' --exact --border --no-sort --ansi --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
 }
 
 #################################

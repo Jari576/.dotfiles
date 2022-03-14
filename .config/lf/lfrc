@@ -90,7 +90,7 @@ map az zip
 map at tar
 map ag targz
 map ab tarbz2
-map ua unarchive
+map au :unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
 map <delete> :delete

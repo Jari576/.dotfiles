@@ -4,46 +4,44 @@ if not status_ok then
 	return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-	return
-end
-
--- following options are the default
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
+vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_highlight_opened_files = 3
+vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_icons = {
 	default = "",
 	symlink = "",
 	git = {
-		unstaged = "",
-		staged = "S",
+		unstaged = "✗",
+		staged = "✓",
 		unmerged = "",
 		renamed = "➜",
+		untracked = "★",
 		deleted = "",
-		untracked = "U",
 		ignored = "◌",
 	},
 	folder = {
+		arrow_open = "",
+		arrow_closed = "",
 		default = "",
 		open = "",
 		empty = "",
 		empty_open = "",
 		symlink = "",
+		symlink_open = "",
 	},
 }
-
-local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup({
 	disable_netrw = false,
 	hijack_netrw = true,
 	open_on_setup = true,
+    ignore_buffer_on_setup = true,
 	ignore_ft_on_setup = { "startify", "dashboard", "alpha" },
-	auto_close = false,
+	auto_close = true,
 	auto_reload_on_write = true,
 	open_on_tab = true,
 	hijack_cursor = true,
-	update_cwd = true,
+	update_cwd = false,
 	hijack_unnamed_buffer_when_opening = true,
 	hijack_directories = {
 		enable = true,
@@ -60,7 +58,7 @@ nvim_tree.setup({
 	},
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
+		update_cwd = false,
 		ignore_list = {},
 	},
 	system_open = {
@@ -81,7 +79,7 @@ nvim_tree.setup({
 		height = 30,
 		hide_root_folder = false,
 		side = "left",
-		auto_resize = true,
+		preserve_window_proportions = true,
 		mappings = {
 			custom_only = false,
 			list = {
@@ -94,12 +92,10 @@ nvim_tree.setup({
 				{ key = { "<" }, action = "prev_sibling" },
 				{ key = { ">" }, action = "next_sibling" },
 				{ key = { "P" }, action = "parent_node" },
-				{ key = { "<BS>" }, action = "close_node" },
+				{ key = { "<BS>", "h" }, action = "close_node" },
 				{ key = { "<Tab>" }, action = "preview" },
 				{ key = { "K" }, action = "first_sibling" },
 				{ key = { "J" }, action = "last_sibling" },
-				{ key = { "I" }, action = "toggle_ignored" },
-				{ key = { "H" }, action = "toggle_dotfiles" },
 				{ key = { "R" }, action = "refresh" },
 				{ key = { "a" }, action = "create" },
 				{ key = { "d" }, action = "remove" },
@@ -122,6 +118,7 @@ nvim_tree.setup({
 		},
 		number = true,
 		relativenumber = true,
+		signcolumn = "yes",
 	},
 	trash = {
 		cmd = "trash",
@@ -129,10 +126,23 @@ nvim_tree.setup({
 	},
 	actions = {
 		change_dir = {
+			enable = false,
 			global = false,
 		},
 		open_file = {
 			quit_on_open = false,
+			resize_window = true,
+			window_picker = {
+                enable = true,
+				exclude = {
+					buftype = {
+                        "notify",
+                        "terminal",
+                        "help",
+                        "nofile"
+                    },
+				},
+			},
 		},
 	},
 })
