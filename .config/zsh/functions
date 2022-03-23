@@ -43,7 +43,7 @@ function fzfcd () {
     zle reset-prompt
     setTerm "fzfcd (%~)"
     previewer='~/.config/lf/previewer {} $FZF_PREVIEW_COLUMNS $FZF_PREVIEW_LINES $(($COLUMNS - $FZF_PREVIEW_COLUMNS)) $(($LINES - $FZF_PREVIEW_LINES))'
-    res=$(find . | fzf --height 40% --exact --reverse --preview=${previewer})
+    res=$(find . | fzf --height 40% --exact --reverse --nth=-1 --delimiter='/' --preview=${previewer})
     if [ -d "$res" ]; then
         cd "$res"
     elif [ -e "$res" ]; then

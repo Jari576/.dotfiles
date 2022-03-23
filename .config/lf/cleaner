@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kitty +kitten icat --silent --transfer-mode stream --clear
+kitty +kitten icat --silent --transfer-mode stream --clear 
 

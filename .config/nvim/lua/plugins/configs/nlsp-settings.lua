@@ -5,9 +5,9 @@ if not status_ok then
 end
 
 nlspsettings.setup({
-  local_settings_dir = ".nlsp-settings",
-  local_settings_root_markers = { '.git' },
-  append_default_schemas = true,
-  loader = 'json'
+	config_home = vim.fn.stdpath("config") .. "/lua/plugins/configs/nlsp-settings",
+	local_settings_dir = ".nlsp-settings",
+	local_settings_root_markers = { ".git" },
+	append_default_schemas = true,
+	loader = "json",
 })
-

@@ -15,6 +15,8 @@ set icons
 set preview on
 set previewer ~/.config/lf/previewer
 set cleaner ~/.config/lf/cleaner
+# set previewer lf-ueberzug-previewer
+# set cleaner lf-ueberzug-cleaner
 
 # Search settings
 set anchorfind off
@@ -47,9 +49,9 @@ cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
 cmd fzf_jump ${{
     previewer='$lf_previewer {} $FZF_PREVIEW_COLUMNS $FZF_PREVIEW_LINES $(($COLUMNS - $FZF_PREVIEW_COLUMNS)) $(($LINES - $FZF_PREVIEW_LINES))'
     if [[ -v $1 ]]; then;
-        res="$(find . -maxdepth $1 | fzf --reverse --exact --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        res="$(find . -maxdepth $1 | fzf --reverse --exact --nth=-1 --delimiter='/' --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
     else
-        res="$(find . | fzf --reverse --exact --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        res="$(find . | fzf --reverse --exact --nth=-1 --delimiter='/' --preview=${previewer} | sed 's/\\/\\\\/g;s/"/\\"/g')"
     fi
 
     if [ -d "$res" ]; then
@@ -94,6 +96,7 @@ map au :unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
 map <delete> :delete
+map d :delete
 map <c-e> :$$EDITOR .
 map J push 5j
 map K push 5k

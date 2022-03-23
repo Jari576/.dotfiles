@@ -196,6 +196,7 @@ return packer.startup(function(use)
 	-- for formatters and linters
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
 		config = get_config("null-ls"),
 	})
 

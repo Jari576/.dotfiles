@@ -105,7 +105,7 @@ local mappings = {
 	f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files" },
 	F = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	P = { "<cmd>Telescope projects<cr>", "Projects" },
-	j = { "<cmd>Pounce<cr>", "Projects" },
+	j = { "<cmd>Pounce<cr>", "Pounce" },
 	p = { "<cmd>PackerSync<cr>", "Packer sync" },
 	g = {
 		name = "Git",

@@ -11,6 +11,12 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd .
+edit ~/Projects/linkedout-profile-checker/dgraph/list.json
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -19,22 +25,14 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-if bufexists("term://~/Projects/linkedout-profile-checker//1254539:/bin/zsh;\#toggleterm\#6") | buffer term://~/Projects/linkedout-profile-checker//1254539:/bin/zsh;\#toggleterm\#6 | else | edit term://~/Projects/linkedout-profile-checker//1254539:/bin/zsh;\#toggleterm\#6 | endif
-if &buftype ==# 'terminal'
-  silent file term://~/Projects/linkedout-profile-checker//1254539:/bin/zsh;\#toggleterm\#6
-endif
-balt ~/Projects/linkedout-profile-checker/linkedout/pages/index.tsx
-let s:l = 29 - ((28 * winheight(0) + 29) / 58)
+let s:l = 20 - ((19 * winheight(0) + 29) / 58)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 29
-normal! 011|
+keepjumps 20
+normal! 0
 tabnext 1
-badd +1 ~/Projects/linkedout-profile-checker/linkedout/pages/_app.tsx
-badd +13 ~/Projects/linkedout-profile-checker/linkedout/pages/api/hello.ts
-badd +15 ~/Projects/linkedout-profile-checker/linkedout/pages/index.tsx
-badd +4 ~/Projects/linkedout-profile-checker/linkedout/package.json
+badd +20 ~/Projects/linkedout-profile-checker/dgraph/list.json
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

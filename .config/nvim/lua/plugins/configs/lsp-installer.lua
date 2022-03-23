@@ -25,18 +25,17 @@ local function lsp_keymaps(bufnr)
 end
 
 local function lsp_highlight_document(client)
-	-- Set autocommands conditional on server_capabilities
 	if client.resolved_capabilities.document_highlight then
-		vim.api.nvim_exec(
-			[[
-                augroup lsp_document_highlight
-                    autocmd! * <buffer>
-                    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-                augroup END
-            ]],
-			false
-		)
+		vim.cmd([[
+            hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+            hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+            hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+            " augroup lsp_document_highlight
+            "     autocmd! * <buffer>
+            "     autocmd! CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            "     autocmd! CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            " augroup END
+        ]])
 	end
 end
 
@@ -46,7 +45,6 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if cmp_status_ok then
 	cmp_nvim_lsp.update_capabilities(capabilities)

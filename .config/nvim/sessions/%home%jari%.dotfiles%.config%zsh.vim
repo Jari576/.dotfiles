@@ -3,14 +3,14 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.dotfiles/.config/nvim
+cd ~/.dotfiles/.config/zsh
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd ~/.config/nvim/
+$argadd ~/.config/zsh/
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -19,7 +19,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 tabnext 1
-badd +33 ./lua/plugins/configs/lsp-installer.lua
+badd +5 ~/.dotfiles/.config/zsh/envvars
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

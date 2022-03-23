@@ -1,32 +1,39 @@
 #!/bin/sh
 
 # only do this when not in lf (lf uses seperate cleaner)
-[[ -v LF_LEVELL ]] || kitty +kitten icat --silent --transfer-mode stream --clear
-# kitty +kitten icat --silent --transfer-mode stream --clear
+# [[ -v LF_LEVELL ]] || kitty +kitten icat --silent --transfer-mode stream --clear
 
 fileName="$1"
-width="$(($2-4))"
-height="$(($3-4))"
-left="$(($4))"
-top="$(($5))"
+width="$2"
+height="$3"
+left="$4"
+top="$5"
 
 function fallback () {
     pistol "$1" "$width" "$height" "$left" "$top"
 }
 
 function handleImage () {
-    if [[ $TERM == "xterm-kitty" ]]; then
-        kitty +kitten icat --silent --transfer-mode stream --place "${width}x${height}@${left}x${top}" --align left "$1"
-    else
-        fallback "$1"
-    fi
+    cat <<-EOF | paste -sd '' >"$LF_UEBERZUG_TEMPDIR/fifo"
+	{
+	"action": "add", "identifier": "lf-preview",
+    "path": "$1", "x": $(($left+1)), "y": $(($top+1)), "width": $(($width-10)), "height": $(($height-10)),
+	"scaler": "contain"
+	}
+	EOF
     exit 1
+    # [[ $TERM == "xterm-kitty" ]]; then
+    #     kitty +kitten icat --transfer-mode stream --place "${width}x${height}@${left}x${top}" --scale-up --stdin=no "$1"
+    #     exit 1
+    # else
+    #     fallback "$1"
+    # fi
 }
 
 function handlePdf () {
     if [[ $TERM == "xterm-kitty" ]]; then
-        CACHE="$(mktemp /tmp/thumbcache.XXXXX)" &&
-        pdftoppm -png -f 1 -singlefile "$1" "$CACHE" &&
+        CACHE="$(mktemp /tmp/thumbcache.XXXXX)"
+        pdftoppm -png -f 1 -singlefile "$1" "$CACHE"
         handleImage "$CACHE.png"
     else
         fallback "$1"
@@ -35,8 +42,8 @@ function handlePdf () {
 
 function handleVideo () {
     if [[ $TERM == "xterm-kitty" ]]; then
-        CACHE="$(mktemp /tmp/thumbcache.XXXXX)" &&
-        ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0 &&
+        CACHE="$(mktemp /tmp/thumbcache.XXXXX)"
+        ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0
         handleImage "$CACHE"
     else
         fallback "$1"
@@ -73,4 +80,5 @@ case "$fileName" in
 	*.avi|*.mp4|*.wmv|*.dat|*.3gp|*.ogv|*.mkv|*.mpg|*.mpeg|*.vob|*.fl[icv]|*.m2v|*.mov|*.webm|*.ts|*.mts|*.m4v|*.r[am]|*.qt|*.divx) handleVideo "$fileName";;
     *) handleMimeType;;
 esac
+
 

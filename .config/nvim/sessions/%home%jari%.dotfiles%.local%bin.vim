@@ -3,14 +3,20 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.dotfiles/.config/nvim
+cd ~/.dotfiles/.local/bin
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd ~/.config/nvim/
+$argadd .
+edit ~/.dotfiles/.local/bin/lf-ueberzug-previewer
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -18,8 +24,17 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+argglobal
+let s:l = 20 - ((19 * winheight(0) + 29) / 58)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 20
+normal! 076|
 tabnext 1
-badd +33 ./lua/plugins/configs/lsp-installer.lua
+badd +20 ~/.dotfiles/.local/bin/lf-ueberzug-previewer
+badd +1 ~/.dotfiles/.local/bin/lf-ueberzug-cleaner
+badd +23 ~/.dotfiles/.local/bin/lf-ueberzug
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
