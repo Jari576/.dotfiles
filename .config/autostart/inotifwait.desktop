@@ -1,0 +1,8 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=false
+Name=ifnotifywait
+Comment=Watch for changes in .dotfiles and execute stow .
+Exec=inotifywait -rqme create,move ~/.dotfiles | while read DIRECTORY EVENT FILE; do stow -d ~/.dotfiles .; done

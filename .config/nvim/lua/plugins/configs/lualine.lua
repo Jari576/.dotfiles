@@ -16,14 +16,14 @@ local diagnostics = {
 		error = " ",
 		warn = " ",
 	},
-	colored = false,
+	colored = true,
 	update_in_insert = false,
-	always_visible = true,
+	always_visible = false,
 }
 
 local diff = {
 	"diff",
-	colored = false,
+	colored = true,
 	symbols = {
 		added = " ",
 		modified = " ",
@@ -68,9 +68,9 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
+		lualine_a = { branch },
 		lualine_b = { mode },
-		lualine_c = {},
+		lualine_c = { "filename", diagnostics },
 		lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
@@ -78,8 +78,8 @@ lualine.setup({
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
+		lualine_c = {},
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
 	},

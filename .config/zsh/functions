@@ -23,6 +23,19 @@ function fuzpac () {
     fzf --bind 'enter:execute(source ~/.config/zsh/functions && toggleParuInstalled {2})+reload(paru -${1-S}l)' --exact --border --no-sort --ansi --reverse --with-nth=1,2,4 --preview 'paru -Si {2}'
 }
 
+function initramfs () {
+
+    kernel_dir="/usr/lib/modules"
+
+    for kernel in $(\ls $kernel_dir)
+    do
+        kernel_name="$(cat $kernel_dir/$kernel/pkgbase)"
+		sudo install -Dm0644 "$kernel_dir/$kernel/vmlinuz" "/boot/vmlinuz-$kernel_name"
+		sudo dracut --force --hostonly "/boot/initramfs-$kernel_name.img" --kver "$kernel"
+		sudo dracut --force --no-hostonly "/boot/initramfs-$kernel_name-fallback.img" --kver "$kernel"
+    done
+}
+
 #################################
 ############ modules #############
 ##################################

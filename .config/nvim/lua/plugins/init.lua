@@ -16,12 +16,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save this file
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost init.lua source <afile> | PackerSync
-    augroup end
-]])
+-- vim.cmd([[
+--     augroup packer_user_config
+--         autocmd!
+--         autocmd BufWritePost init.lua source <afile> | PackerSync
+--     augroup end
+-- ]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -143,8 +143,12 @@ return packer.startup(function(use)
 
 	use("moll/vim-bbye")
 
-	-- Colorschemes
-	use("lunarvim/colorschemes") -- A bunch of colorschemes you can try out
+	-- Colorscheme
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+        config = get_config("catppuccin")
+	})
 
 	-- cmp plugins
 	-- The completion plugin
@@ -196,7 +200,7 @@ return packer.startup(function(use)
 	-- for formatters and linters
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+		requires = { "nvim-lua/plenary.nvim" },
 		config = get_config("null-ls"),
 	})
 
@@ -299,8 +303,8 @@ return packer.startup(function(use)
 		"folke/persistence.nvim",
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
 		module = "persistence",
-		config = get_config("persistence")
-    })
+		config = get_config("persistence"),
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

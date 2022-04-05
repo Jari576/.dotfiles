@@ -96,7 +96,6 @@ map au :unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
 map <delete> :delete
-map d :delete
 map <c-e> :$$EDITOR .
 map J push 5j
 map K push 5k

@@ -34,10 +34,9 @@ vim.g.nvim_tree_icons = {
 nvim_tree.setup({
 	disable_netrw = false,
 	hijack_netrw = true,
-	open_on_setup = true,
+	open_on_setup = false,
     ignore_buffer_on_setup = true,
 	ignore_ft_on_setup = { "startify", "dashboard", "alpha" },
-	auto_close = true,
 	auto_reload_on_write = true,
 	open_on_tab = true,
 	hijack_cursor = true,
@@ -71,7 +70,7 @@ nvim_tree.setup({
 	},
 	git = {
 		enable = true,
-		ignore = true,
+		ignore = false,
 		timeout = 100,
 	},
 	view = {
@@ -112,7 +111,7 @@ nvim_tree.setup({
 				{ key = { "]c" }, action = "next_git_item" },
 				{ key = { "-" }, action = "dir_up" },
 				{ key = { "s" }, action = "system_open" },
-				-- { key = { "q" }, action = "close" },
+				{ key = { "q" }, action = "close" },
 				{ key = { "g?" }, action = "toggle_help" },
 			},
 		},

@@ -7,7 +7,7 @@ alias zshrc=$EDITOR' ~/.config/zsh/'
 # paru aliases
 if [ -x "$(command -v paru)" ]; then
     alias p="paru -Sl | fuzpac"
-    alias psyu="paru -Syu"
+    alias psyu="paru -Syyu"
     alias ps="paru -S"
     alias pss="paru -Sl | fuzpac"
 fi
@@ -34,5 +34,4 @@ alias mkdir='mkdir -pv'
 # kitty ssh
 alias ssh='kitty +kitten ssh'
 
-# initcpio
-alias initcpio='sudo mkinitcpio -P && sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias draak='sudo dracut --keep -f "/boot/initramfs-linux-zen.img"'
