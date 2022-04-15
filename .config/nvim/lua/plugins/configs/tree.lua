@@ -4,7 +4,6 @@ if not status_ok then
 	return
 end
 
-vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_highlight_opened_files = 3
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_icons = {
@@ -42,6 +41,7 @@ nvim_tree.setup({
 	hijack_cursor = true,
 	update_cwd = false,
 	hijack_unnamed_buffer_when_opening = true,
+    nvim_tree_indent_markers = true,
 	hijack_directories = {
 		enable = true,
 		auto_open = true,

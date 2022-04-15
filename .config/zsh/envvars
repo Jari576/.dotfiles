@@ -26,3 +26,4 @@ LF_ICONS=$(sed ~/.config/lf/diricons \
 LF_ICONS=${LF_ICONS//$'\n'/:}
 export LF_ICONS
 
+export TASKRC=~/.config/task/taskrc

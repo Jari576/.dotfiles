@@ -95,6 +95,7 @@ return packer.startup(function(use)
 	-- Tab bar
 	use({
 		"akinsho/bufferline.nvim",
+        branch = "main",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = get_config("bufferline"),
 	})
@@ -111,6 +112,7 @@ return packer.startup(function(use)
 	-- In-Editor terminals
 	use({
 		"akinsho/toggleterm.nvim",
+        branch = "main",
 		config = get_config("toggleterm"),
 	})
 
