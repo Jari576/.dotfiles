@@ -86,7 +86,6 @@ local opts = {
 }
 
 local mappings = {
-	a = { "<cmd>Alpha<cr>", "Alpha" },
 	b = {
 		name = "Buffers",
 		b = {
@@ -107,6 +106,7 @@ local mappings = {
 	P = { "<cmd>Telescope projects<cr>", "Projects" },
 	j = { "<cmd>Pounce<cr>", "Pounce" },
 	p = { "<cmd>PackerSync<cr>", "Packer sync" },
+    r = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
 	g = {
 		name = "Git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },

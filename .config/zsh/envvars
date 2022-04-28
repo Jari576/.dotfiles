@@ -2,7 +2,7 @@
 
 typeset -U PATH path
 
-path=("$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/go/bin" "$HOME/.deno/bin" "$path[@]")
+path=("$HOME/.local/bin" "$(ruby -e 'puts Gem.user_dir')/bin" "$HOME/.cargo/bin" "$HOME/go/bin" "$HOME/.deno/bin" "$path[@]")
 export PATH
 
 export XDG_CONFIG_HOME=$HOME/.config
@@ -17,13 +17,5 @@ fpath=($PLUGINS_DIRECTORY $fpath)
 if [ -x "$(command -v nvim)" ]; then
     export EDITOR="nvim"
 fi
-
-LF_ICONS=$(sed ~/.config/lf/diricons \
-        -e '/^[ \t]*#/d'       \
-        -e '/^[ \t]*$/d'       \
-        -e 's/[ \t]\+/=/g'     \
-        -e 's/$/ /')
-LF_ICONS=${LF_ICONS//$'\n'/:}
-export LF_ICONS
 
 export TASKRC=~/.config/task/taskrc

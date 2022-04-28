@@ -6,6 +6,7 @@ end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
+	vim.notify("cmp not loaded", "error")
 	return
 end
 
@@ -131,10 +132,10 @@ cmp.setup({
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
-		select = false,
+		select = true,
 	},
 	window = {
-		documentation = "native",
+		-- documentation = "native",
 	},
 	experimental = {
 		ghost_text = false,

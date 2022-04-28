@@ -6,10 +6,10 @@ end
 
 npairs.setup({
 	check_ts = true,
-	disable_filetype = { "TelescopePrompt", "spectre_panel" },
-    enable_check_bracket_line = false,
+	disable_filetype = { "TelescopePrompt" },
+    enable_check_bracket_line = true,
 	fast_wrap = {
-		map = "<M-e>",
+		map = "<A-e>",
 		chars = { "{", "[", "(", '"', "'" },
 		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
 		offset = 1, -- Offset from pattern match

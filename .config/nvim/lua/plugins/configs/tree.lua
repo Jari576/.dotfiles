@@ -41,7 +41,6 @@ nvim_tree.setup({
 	hijack_cursor = true,
 	update_cwd = false,
 	hijack_unnamed_buffer_when_opening = true,
-    nvim_tree_indent_markers = true,
 	hijack_directories = {
 		enable = true,
 		auto_open = true,

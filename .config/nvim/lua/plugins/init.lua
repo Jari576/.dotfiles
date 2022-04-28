@@ -16,12 +16,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save this file
--- vim.cmd([[
---     augroup packer_user_config
---         autocmd!
---         autocmd BufWritePost init.lua source <afile> | PackerSync
---     augroup end
--- ]])
+vim.cmd([[
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost init.lua source <afile> | PackerSync
+    augroup end
+]])
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -169,9 +169,6 @@ return packer.startup(function(use)
 		config = get_config("cmp"),
 	})
 
-	-- a bunch of snippets to use
-	use("rafamadriz/friendly-snippets")
-
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig",
@@ -239,10 +236,16 @@ return packer.startup(function(use)
 		config = get_config("ts-autotag"),
 	})
 	use({
-		"romgrk/nvim-treesitter-context",
+		"lewis6991/nvim-treesitter-context",
 		requires = { "nvim-treesitter/nvim-treesitter" },
 		config = get_config("treesitter-context"),
 	})
+	-- use({
+	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
+	-- 	requires = { "nvim-treesitter/nvim-treesitter" },
+	-- 	config = get_config("treesitter-textobjects"),
+	-- })
+
 
 	-- Easily comment stuff
 	use({
