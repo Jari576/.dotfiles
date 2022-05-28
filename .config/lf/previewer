@@ -4,6 +4,7 @@
 [[ -v LF_LEVELL ]] || kitty +kitten icat --silent --transfer-mode stream --clear
 # kitty +kitten icat --silent --transfer-mode stream --clear
 
+
 fileName="$1"
 width="$(($2-4))"
 height="$(($3-4))"
@@ -15,16 +16,18 @@ function fallback () {
 }
 
 function handleImage () {
-    if [[ $TERM == "xterm-kitty" ]]; then
+    if [ $TERM == "xterm-kitty" ]; then
         kitty +kitten icat --silent --transfer-mode stream --place "${width}x${height}@${left}x${top}" --align left "$1"
+        exit 1
+    elif [ $TERM_PROGRAM == "WezTerm" ]; then
+        wezterm imgcat "$1"
     else
         fallback "$1"
     fi
-    exit 1
 }
 
 function handlePdf () {
-    if [[ $TERM == "xterm-kitty" ]]; then
+    if [ $TERM == "xterm-kitty" ] || [ $TERM_PROGRAM == "WezTerm" ]; then
         CACHE="$(mktemp /tmp/thumbcache.XXXXX)" &&
         pdftoppm -png -f 1 -singlefile "$1" "$CACHE" &&
         handleImage "$CACHE.png"
@@ -34,10 +37,12 @@ function handlePdf () {
 }
 
 function handleVideo () {
-    if [[ $TERM == "xterm-kitty" ]]; then
-        CACHE="$(mktemp /tmp/thumbcache.XXXXX)" &&
-        ffmpegthumbnailer -i "$1" -o "$CACHE" -s 0 &&
-        handleImage "$CACHE"
+    if [ $TERM == "xterm-kitty" ] || [ $TERM_PROGRAM == "WezTerm" ]; then
+        if [ ! -f "/tmp/thumbcache/$1.jpeg" ]; then
+            mkdir -p /tmp/thumbcache/"$PWD"
+            ffmpegthumbnailer -i "$1" -o "/tmp/thumbcache/$1.jpeg" -s 0
+        fi
+        handleImage "/tmp/thumbcache/$1.jpeg"
     else
         fallback "$1"
     fi

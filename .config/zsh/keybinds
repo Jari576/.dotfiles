@@ -58,3 +58,4 @@ bindkey '^o' lfcd
 bindkey '^F' fzfcd
 bindkey '^e' editCurDir
 
+bindkey -s '^z' "^Uzi^M"

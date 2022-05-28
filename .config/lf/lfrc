@@ -105,6 +105,15 @@ cmd on-cd &{{
 }}
 on-cd
 
+cmd trash %{{
+    set -f
+    printf "delete $fx? [y/n]"
+    read ans
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        trash-put $fx
+    fi
+}}
+
 # Keymaps
 map <enter> shell
 map sn :set sortby natural
@@ -120,7 +129,7 @@ map ab tarbz2
 map au :unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
-map <delete> :delete
+map <delete> :trash
 map <c-e> :$$EDITOR .
 map J push 5j
 map K push 5k

@@ -15,4 +15,4 @@ source "$ZDOTDIR/conda_initialize"
 
 eval "$(starship init zsh)"
 eval $(keychain --eval --quiet --confhost)
-
+eval "$(zoxide init zsh)"
