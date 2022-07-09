@@ -4,6 +4,9 @@ return {
 			editor = {
 				tabSize = 2,
 			},
+            format = {
+                enable = true
+            },
 		},
 	},
 }

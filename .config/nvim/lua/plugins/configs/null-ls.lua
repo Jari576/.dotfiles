@@ -1,6 +1,6 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
-    vim.notify("null_ls not loaded", "error")
+	vim.notify("null_ls not loaded", "error")
 	return
 end
 
@@ -13,13 +13,12 @@ null_ls.setup({
 	debug = true,
 	sources = {
 		formatting.prettier.with({
+            disabled_filetypes = { "ts", "typescript", "typescriptreact", "js", "javascript", "javascriptreact", "tsx", "jsx", "json", "html" },
 			extra_args = {},
 		}),
 		formatting.black.with({
 			extra_args = { "--fast" },
 		}),
-		formatting.stylua,
-		diagnostics.flake8,
+		-- formatting.stylua,
 	},
 })
-

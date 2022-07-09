@@ -1,0 +1,19 @@
+#!/bin/sh
+
+PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins
+fpath=($PLUGINS_DIRECTORY $fpath)
+# fpath=("$ZDOTDIR/plugin_functions" "$ZDOTDIR/functions" $fpath)
+# autoload -U $fpath[1]/*(.:t)
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+
+export STARSHIP_CONFIG=~/.config/starship/config.toml
+
+if [ -x "$(command -v nvim)" ]; then
+    export EDITOR="nvim"
+fi
+
+export TASKRC=~/.config/task/taskrc
+

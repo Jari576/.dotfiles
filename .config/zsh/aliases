@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # easy config editing
 alias nvimrc=$EDITOR' ~/.config/nvim/'
@@ -32,6 +32,6 @@ alias v=$EDITOR
 alias mkdir='mkdir -pv'
 
 # kitty ssh
-alias ssh='kitty +kitten ssh'
+[[ $TERM == "xterm-kitty" ]] && alias ssh='kitty +kitten ssh'
 
-alias draak='sudo dracut --keep -f "/boot/initramfs-linux-zen.img"'
+alias nv="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"

@@ -1,34 +1,51 @@
-# Basic settings
-set shell zsh
+# Settings
+set anchorfind off
+set autoquit off
+set cleaner ~/.config/lf/cleaner
+set dircache on
+# set dircounts on
+# set dirfirst on
+# set dironly
 set drawbox on
-set scrolloff 20
-set tabstop 4
-
-# Show info
+set errorfmt "\033[7;31;47m%s\033[0m"
+set filesep "\n"
+set findlen 1
+set globsearch on
 set hidden on
-set number on
-set relativenumber on
+set hiddenfiles '.*'
+set icons on
+set ifs ''
+set ignorecase on
+set ignoredia on
+set incfilter on
+set incsearch on
 set info size:time
-set icons
-
-# Previewer
+set infotimefmtnew 'Jan _2 15:04'
+set infotimefmtold 'Jan _2  2006'
+# set mouse
+set number on
+set period 1
 set preview on
 set previewer ~/.config/lf/previewer
-set cleaner ~/.config/lf/cleaner
-# set previewer lf-ueberzug-previewer
-# set cleaner lf-ueberzug-cleaner
-
-# Search settings
-set anchorfind off
-set incsearch on
-set incfilter on
-set globsearch on
-set ignorecase on
+set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f\033[0m"
+set ratios '1:2:3'
+set relativenumber on
+# set reverse
+set scrolloff 20
+set shell zsh
+set shellflag '-c'
+set shellopts ''
 set smartcase on
-set ignoredia on
 set smartdia on
+# set sortby 'natural'
+set tabstop 4
+# set tagfmt "\033[31m%s\033[0m"
+set tempmarks ''
+set timefmt 'Mon Jan _2 15:04:05 2006'
+set truncatechar '~'
+set waitmsg 'Press any key to continue'
 set wrapscan on
-set findlen 1
+set wrapscroll off
 
 # Unarchive function
 cmd unarchive ${{
@@ -70,6 +87,14 @@ cmd editSudoOrNot ${{
     fi
 }}
 
+cmd open ${{
+    test -L $f && f=$(readlink -f $f)
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
 cmd on-cd &{{
     case $TERM in
       sun-cmd) print -Pn "\e]lLF (%~)\e\\" > /dev/tty
@@ -79,6 +104,15 @@ cmd on-cd &{{
     esac
 }}
 on-cd
+
+cmd trash %{{
+    set -f
+    printf "delete $fx? [y/n]"
+    read ans
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        trash-put $fx
+    fi
+}}
 
 # Keymaps
 map <enter> shell
@@ -95,7 +129,7 @@ map ab tarbz2
 map au :unarchive
 map <c-f> :fzf_jump
 map <c-j> :fzf_jump 1
-map <delete> :delete
+map <delete> :trash
 map <c-e> :$$EDITOR .
 map J push 5j
 map K push 5k

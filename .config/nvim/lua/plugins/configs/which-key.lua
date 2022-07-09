@@ -15,7 +15,7 @@ local setup = {
 		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
 		-- No actual key bindings are created
 		presets = {
-			operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+			operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
 			motions = false, -- adds help for motions
 			text_objects = true, -- help for text objects triggered after entering an operator
 			windows = true, -- default bindings on <c-w>
@@ -86,7 +86,6 @@ local opts = {
 }
 
 local mappings = {
-	a = { "<cmd>Alpha<cr>", "Alpha" },
 	b = {
 		name = "Buffers",
 		b = {
@@ -105,8 +104,8 @@ local mappings = {
 	f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find files" },
 	F = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	P = { "<cmd>Telescope projects<cr>", "Projects" },
-	j = { "<cmd>Pounce<cr>", "Pounce" },
 	p = { "<cmd>PackerSync<cr>", "Packer sync" },
+    r = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
 	g = {
 		name = "Git",
 		g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },

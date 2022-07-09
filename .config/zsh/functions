@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source "$ZDOTDIR/key-bindings.zsh"
+
 # add, commit and push
 function send () {
     git add -A
@@ -34,6 +36,8 @@ function initramfs () {
 		sudo dracut --force --hostonly "/boot/initramfs-$kernel_name.img" --kver "$kernel"
 		sudo dracut --force --no-hostonly "/boot/initramfs-$kernel_name-fallback.img" --kver "$kernel"
     done
+
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 #################################
