@@ -12,7 +12,16 @@ local function get_server_config(server)
     return {}
 end
 
+vim.cmd [[
+    function! s:deregister_autocmd() abort
+        " Disables the self-closing behavior of the window
+        autocmd TextChanged <buffer> ++once autocmd! LspInstallerWindow
+    endfunction
+
+    " For a right-aligned window
+    autocmd FileType lsp-installer wincmd L | call s:deregister_autocmd()
+]]
 -- do this when a ls is established
-lsp_installer.on_server_ready(function (server)
+lsp_installer.on_server_ready(function(server)
     server:setup(get_server_config(server))
 end)

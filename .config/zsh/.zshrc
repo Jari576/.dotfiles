@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source "$ZDOTDIR/envvars"
+source "$ZDOTDIR/env"
 
 source "$ZDOTDIR/plugin_functions"
 mkdir -p $PLUGINS_DIRECTORY
@@ -11,7 +11,8 @@ source "$ZDOTDIR/aliases"
 source "$ZDOTDIR/options"
 source "$ZDOTDIR/completion"
 source "$ZDOTDIR/keybinds"
-source "$ZDOTDIR/conda_initialize"
+
+# source "$ZDOTDIR/conda_initialize"
 
 eval "$(starship init zsh)"
 eval $(keychain --eval --quiet --confhost)

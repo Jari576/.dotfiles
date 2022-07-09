@@ -20,6 +20,5 @@ null_ls.setup({
 			extra_args = { "--fast" },
 		}),
 		-- formatting.stylua,
-		diagnostics.flake8,
 	},
 })

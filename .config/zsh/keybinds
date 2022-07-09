@@ -47,11 +47,11 @@ zle -N down-line-or-beginning-search
 [[ -n "${key[Control-Backspace]}" ]] && bindkey -- "${key[Control-Backspace]}" backward-kill-word
 
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
- autoload -Uz add-zle-hook-widget
- function zle_application_mode_start { echoti smkx }
- function zle_application_mode_stop { echoti rmkx }
- add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
- add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+    autoload -Uz add-zle-hook-widget
+    function zle_application_mode_start { echoti smkx }
+    function zle_application_mode_stop { echoti rmkx }
+    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
 bindkey '^o' lfcd
@@ -59,3 +59,4 @@ bindkey '^F' fzfcd
 bindkey '^e' editCurDir
 
 bindkey -s '^z' "^Uzi^M"
+bindkey -s '^P' "^Usysz^M"

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-typeset -U PATH path
-
-path=("$HOME/.local/bin" "$(ruby -e 'puts Gem.user_dir')/bin" "$HOME/.cargo/bin" "$HOME/go/bin" "$HOME/.deno/bin" "$path[@]")
-export PATH
+PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins
+fpath=($PLUGINS_DIRECTORY $fpath)
+# fpath=("$ZDOTDIR/plugin_functions" "$ZDOTDIR/functions" $fpath)
+# autoload -U $fpath[1]/*(.:t)
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
@@ -11,11 +11,9 @@ export XDG_CACHE_HOME=$HOME/.cache
 
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 
-PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins
-fpath=($PLUGINS_DIRECTORY $fpath)
-
 if [ -x "$(command -v nvim)" ]; then
     export EDITOR="nvim"
 fi
 
 export TASKRC=~/.config/task/taskrc
+

@@ -11,8 +11,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
         "https://github.com/wbthomason/packer.nvim",
         install_path,
     })
-    print("Installing packer close and reopen Neovim...")
-    vim.cmd([[packadd! packer.nvim]])
 end
 
 -- Autocommand that reloads neovim whenever you save this file
@@ -29,6 +27,7 @@ if not status_ok then
     vim.notify("packer not loaded", "error")
     return
 end
+
 
 -- Have packer use a popup window
 packer.init({
@@ -313,6 +312,15 @@ return packer.startup(function(use)
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         module = "persistence",
         config = get_config("persistence"),
+    })
+
+    use({
+        'mvllow/modes.nvim',
+        config = get_config("modes")
+    })
+
+    use({
+        'wakatime/vim-wakatime'
     })
 
     -- Automatically set up your configuration after cloning packer.nvim
