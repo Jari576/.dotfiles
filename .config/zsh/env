@@ -16,4 +16,5 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 export TASKRC=~/.config/task/taskrc
+export _ZO_FZF_OPTS="--preview='exa -alh --group-directories-first' --reverse --no-sort --select-1 --exit-0 --bind=ctrl-z:ignore"
 

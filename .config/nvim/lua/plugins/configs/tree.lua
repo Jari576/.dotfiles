@@ -9,16 +9,28 @@ nvim_tree.setup({
     hijack_netrw = true,
     open_on_setup = false,
     ignore_buffer_on_setup = true,
-    ignore_ft_on_setup = { "startify", "dashboard", "alpha" },
     auto_reload_on_write = true,
     open_on_tab = true,
     hijack_cursor = true,
     update_cwd = false,
     hijack_unnamed_buffer_when_opening = true,
+    filesystem_watchers = {
+        enable = true,
+    },
     renderer = {
         highlight_opened_files = "all",
+        full_name = true,
         highlight_git = true,
         group_empty = true,
+        indent_markers = {
+            enable = false,
+            icons = {
+                corner = "└",
+                edge = "│",
+                item = "│",
+                none = " ",
+            },
+        },
         icons = {
             glyphs = {
                 default = "",
@@ -42,7 +54,8 @@ nvim_tree.setup({
                     symlink = "",
                     symlink_open = "",
                 },
-            } },
+            }
+        },
     },
     hijack_directories = {
         enable = true,
@@ -78,9 +91,12 @@ nvim_tree.setup({
     view = {
         width = 30,
         height = 30,
+        adaptive_size = true,
         hide_root_folder = false,
         side = "left",
-        preserve_window_proportions = true,
+        number = true,
+        relativenumber = true,
+        signcolumn = "yes",
         mappings = {
             custom_only = false,
             list = {
@@ -117,9 +133,6 @@ nvim_tree.setup({
                 { key = { "g?" }, action = "toggle_help" },
             },
         },
-        number = true,
-        relativenumber = true,
-        signcolumn = "yes",
     },
     trash = {
         cmd = "trash",

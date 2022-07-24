@@ -5,5 +5,5 @@ if not status_ok then
 end
 
 shade.setup({
-  overlay_opacity = 50,
+    overlay_opacity = 50,
 })

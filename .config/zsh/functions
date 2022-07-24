@@ -53,6 +53,7 @@ function lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
     zle reset-prompt
+    setTermCurrentDir
 }
 zle -N lfcd
 

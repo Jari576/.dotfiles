@@ -6,6 +6,11 @@ end
 
 local actions = require "telescope.actions"
 
+telescope.load_extension('fzf')
+telescope.load_extension('zoxide')
+telescope.load_extension('neoclip')
+telescope.load_extension('env')
+
 telescope.setup {
     defaults = {
         prompt_prefix = " ",
@@ -95,7 +100,3 @@ telescope.setup {
     }
 }
 
-telescope.load_extension('fzf')
-telescope.load_extension('zoxide')
-telescope.load_extension('neoclip')
-telescope.load_extension('env')

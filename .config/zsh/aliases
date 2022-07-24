@@ -28,7 +28,7 @@ alias tf2map='cd ~/.local/share/Steam/steamapps/common/Team\ Fortress\ 2/tf'
 alias vim=$EDITOR
 alias v=$EDITOR
 [ -x "$(command -v bat)" ] && alias cat='bat'
-[ -x "$(command -v exa)" ] && alias ls='exa -al'
+[ -x "$(command -v exa)" ] && alias ls='exa -alh --group-directories-first'
 alias mkdir='mkdir -pv'
 
 # kitty ssh
