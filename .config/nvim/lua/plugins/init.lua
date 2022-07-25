@@ -49,6 +49,8 @@ local get_config = function(name)
     return string.format('require("plugins/configs/%s")', name)
 end
 
+vim.cmd [[packadd packer.nvim]]
+
 -- Install your plugins here
 return packer.startup(function(use)
     -- My plugins here
