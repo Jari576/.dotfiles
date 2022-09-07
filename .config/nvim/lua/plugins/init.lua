@@ -38,6 +38,9 @@ packer.init({
             })
         end,
     },
+    git = {
+        clone_timeout =false,
+    },
     log = {
         level = "debug",
     },
@@ -89,7 +92,8 @@ return packer.startup(function(use)
     })
 
     use({
-        "Pocco81/AutoSave.nvim",
+        "Pocco81/auto-save.nvim",
+        branch = "main",
         config = get_config("autosave"),
     })
 

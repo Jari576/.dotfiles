@@ -9,3 +9,6 @@ export TERMINAL=kitty
 
 # fix for no cursor on Wayland
 # export WLR_NO_HARDWARE_CURSORS=1
+
+export LIBVA_DRIVER_NAME="vdpau"
+export VDPAU_DRIVER="nvidia"

@@ -15,5 +15,6 @@ source "$ZDOTDIR/keybinds"
 # source "$ZDOTDIR/conda_initialize"
 
 eval "$(starship init zsh)"
-eval $(keychain --eval --quiet --confhost --inherit any)
 eval "$(zoxide init zsh)"
+eval $(keychain --eval --quiet --confhost --inherit any)
+eval $(thefuck --alias)

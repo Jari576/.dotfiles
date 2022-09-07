@@ -12,10 +12,10 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
 	debug = true,
 	sources = {
-		formatting.prettier.with({
-            disabled_filetypes = { "ts", "typescript", "typescriptreact", "js", "javascript", "javascriptreact", "tsx", "jsx", "json", "html" },
-			extra_args = {},
-		}),
+		-- formatting.prettier.with({
+  --           disabled_filetypes = { "ts", "typescript", "typescriptreact", "js", "javascript", "javascriptreact", "tsx", "jsx", "json", "html" },
+		-- 	extra_args = {},
+		-- }),
 		formatting.black.with({
 			extra_args = { "--fast" },
 		}),
