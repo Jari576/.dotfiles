@@ -39,7 +39,7 @@ packer.init({
         end,
     },
     git = {
-        clone_timeout =false,
+        clone_timeout = false,
     },
     log = {
         level = "debug",
@@ -76,6 +76,11 @@ return packer.startup(function(use)
         config = get_config("notify"),
     })
 
+    use({
+        "RRethy/vim-illuminate",
+        config = get_config("illuminate"),
+    })
+
     -- file manager
     use({
         "kyazdani42/nvim-tree.lua",
@@ -92,7 +97,7 @@ return packer.startup(function(use)
     })
 
     use({
-        "Pocco81/auto-save.nvim",
+        "nvim-zh/auto-save.nvim",
         branch = "main",
         config = get_config("autosave"),
     })
@@ -110,6 +115,7 @@ return packer.startup(function(use)
         "nvim-lualine/lualine.nvim",
         requires = {
             "kyazdani42/nvim-web-devicons",
+            "EdenEast/nightfox.nvim",
         },
         config = get_config("lualine"),
     })
@@ -151,10 +157,24 @@ return packer.startup(function(use)
     use("moll/vim-bbye")
 
     -- Colorscheme
+    --[[ use({ ]]
+    --[[     "catppuccin/nvim", ]]
+    --[[     as = "catppuccin", ]]
+    --[[     run = ":CatppuccinCompile", ]]
+    --[[     config = get_config("catppuccin") ]]
+    --[[ }) ]]
+
+    --[[ use({ ]]
+    --[[     "folke/tokyonight.nvim", ]]
+    --[[     branch = "main", ]]
+    --[[     config = get_config("tokyonight"), ]]
+    --[[ }) ]]
+
     use({
-        "catppuccin/nvim",
-        as = "catppuccin",
-        config = get_config("catppuccin")
+        "EdenEast/nightfox.nvim",
+        branch = "main",
+        run = ":NightfoxCompile",
+        config = get_config("nightfox"),
     })
 
     -- cmp plugins
@@ -240,6 +260,11 @@ return packer.startup(function(use)
         config = get_config("treesitter"),
     })
     use({
+        "nvim-treesitter/playground",
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        config = get_config("treesitter-playground"),
+    })
+    use({
         "windwp/nvim-ts-autotag",
         requires = { "nvim-treesitter/nvim-treesitter" },
         config = get_config("ts-autotag"),
@@ -249,11 +274,11 @@ return packer.startup(function(use)
         requires = { "nvim-treesitter/nvim-treesitter" },
         config = get_config("treesitter-context"),
     })
-    -- use({
-    -- 	"nvim-treesitter/nvim-treesitter-textobjects",
-    -- 	requires = { "nvim-treesitter/nvim-treesitter" },
-    -- 	config = get_config("treesitter-textobjects"),
-    -- })
+    --[[ use({ ]]
+    --[[ 	"nvim-treesitter/nvim-treesitter-textobjects", ]]
+    --[[ 	requires = { "nvim-treesitter/nvim-treesitter" }, ]]
+    --[[ 	config = get_config("treesitter-textobjects"), ]]
+    --[[ }) ]]
 
 
     -- Easily comment stuff
@@ -271,13 +296,18 @@ return packer.startup(function(use)
     })
 
     -- Smooth scrolling
-    use({
-        "psliwka/vim-smoothie",
-    })
+    --[[ use({ ]]
+    --[[     "psliwka/vim-smoothie", ]]
+    --[[ }) ]]
+    use {
+        'declancm/cinnamon.nvim',
+        config = get_config("cinnamon")
+    }
 
     use({
         "norcalli/nvim-colorizer.lua",
         event = "BufReadPre",
+        config = get_config("colorizer"),
     })
 
     use({
