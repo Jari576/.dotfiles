@@ -1,6 +1,6 @@
 local status_ok, textobject = pcall(require, "nvim-treesitter-textobjects")
 if not status_ok then
-    vim.notify("treesistter-textobject not loaded", "error")
+    vim.notify("treesistter-textobject not loaded", vim.log.levels.ERROR)
     return
 end
 

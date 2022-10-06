@@ -1,6 +1,6 @@
 local status_ok, persistence = pcall(require, "persistence")
 if not status_ok then
-	vim.notify("persistence not loaded", "error")
+	vim.notify("persistence not loaded", vim.log.levels.ERROR)
 	return
 end
 

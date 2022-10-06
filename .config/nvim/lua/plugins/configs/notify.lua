@@ -1,6 +1,6 @@
 local status_ok, notify = pcall(require, "notify")
 if not status_ok then
-    vim.notify("notify not loaded", "error")
+    vim.notify("notify not loaded", vim.log.levels.ERROR)
     return
 end
 vim.notify = notify

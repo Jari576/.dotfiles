@@ -1,6 +1,6 @@
 local status_ok, specs = pcall(require, "specs")
 if not status_ok then
-	vim.notify("specs not loaded", "error")
+	vim.notify("specs not loaded", vim.log.levels.ERROR)
 	return
 end
 

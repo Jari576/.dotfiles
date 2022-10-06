@@ -1,6 +1,6 @@
 local status_ok, context = pcall(require, "treesitter-context")
 if not status_ok then
-	vim.notify("treesitter-context not loaded", "error")
+	vim.notify("treesitter-context not loaded", vim.log.levels.ERROR)
 	return
 end
 

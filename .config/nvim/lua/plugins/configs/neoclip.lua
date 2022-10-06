@@ -1,6 +1,6 @@
 local status_ok, neoclip = pcall(require, "neoclip")
 if not status_ok then
-	vim.notify("neoclip not loaded", "error")
+	vim.notify("neoclip not loaded", vim.log.levels.ERROR)
 	return
 end
 

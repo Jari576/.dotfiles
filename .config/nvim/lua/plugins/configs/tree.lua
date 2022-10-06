@@ -1,6 +1,6 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
-    vim.notify("tree not loaded", "error")
+    vim.notify("tree not loaded", vim.log.levels.ERROR)
     return
 end
 
@@ -97,7 +97,7 @@ nvim_tree.setup({
         relativenumber = true,
         signcolumn = "yes",
         mappings = {
-            custom_only = false,
+            custom_only = true,
             list = {
                 { key = { "<CR>", "o", "<2-LeftMouse>", "l" }, action = "edit" },
                 { key = { "O" }, action = "edit_no_picker" },

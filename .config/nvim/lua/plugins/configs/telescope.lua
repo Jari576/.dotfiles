@@ -1,6 +1,6 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-    vim.notify("telescope not loaded", "error")
+    vim.notify("telescope not loaded", vim.log.levels.ERROR)
     return
 end
 

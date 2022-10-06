@@ -24,7 +24,7 @@ end
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-    vim.notify("packer not loaded", "error")
+    vim.notify("packer not loaded", vim.log.levels.ERROR)
     return
 end
 
@@ -155,20 +155,6 @@ return packer.startup(function(use)
     })
 
     use("moll/vim-bbye")
-
-    -- Colorscheme
-    --[[ use({ ]]
-    --[[     "catppuccin/nvim", ]]
-    --[[     as = "catppuccin", ]]
-    --[[     run = ":CatppuccinCompile", ]]
-    --[[     config = get_config("catppuccin") ]]
-    --[[ }) ]]
-
-    --[[ use({ ]]
-    --[[     "folke/tokyonight.nvim", ]]
-    --[[     branch = "main", ]]
-    --[[     config = get_config("tokyonight"), ]]
-    --[[ }) ]]
 
     use({
         "EdenEast/nightfox.nvim",
@@ -353,6 +339,11 @@ return packer.startup(function(use)
     use({
         'mvllow/modes.nvim',
         config = get_config("modes")
+    })
+
+
+    use({
+        'wakatime/vim-wakatime',
     })
 
     -- Automatically set up your configuration after cloning packer.nvim

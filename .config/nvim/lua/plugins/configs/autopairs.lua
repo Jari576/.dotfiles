@@ -1,6 +1,6 @@
 local status_ok, npairs = pcall(require, "nvim-autopairs")
 if not status_ok then
-	vim.notify("autopairs not loaded", "error")
+	vim.notify("autopairs not loaded", vim.log.levels.ERROR)
 	return
 end
 

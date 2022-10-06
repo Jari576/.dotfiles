@@ -1,6 +1,6 @@
 local status_ok, modes = pcall(require, "modes")
 if not status_ok then
-    vim.notify("modes not loaded", "error")
+    vim.notify("modes not loaded", vim.log.levels.ERROR)
     return
 end
 

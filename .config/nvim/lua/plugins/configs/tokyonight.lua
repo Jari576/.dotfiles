@@ -1,6 +1,6 @@
 local status_ok, tokyonight = pcall(require, "tokyonight")
 if not status_ok then
-    vim.notify("tokyonight not loaded", "error")
+    vim.notify("tokyonight not loaded", vim.log.levels.ERROR)
     return
 end
 

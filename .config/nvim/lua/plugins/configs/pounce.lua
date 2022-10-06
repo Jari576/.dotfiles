@@ -1,6 +1,6 @@
 local status_ok, pounce = pcall(require, "pounce")
 if not status_ok then
-    vim.notify("pounce not loaded", "error")
+    vim.notify("pounce not loaded", vim.log.levels.ERROR)
 	return
 end
 

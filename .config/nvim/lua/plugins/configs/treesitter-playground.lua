@@ -1,6 +1,6 @@
 local status_ok, playground = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
-    vim.notify("playground not loaded", "error")
+    vim.notify("playground not loaded", vim.log.levels.ERROR)
     return
 end
 

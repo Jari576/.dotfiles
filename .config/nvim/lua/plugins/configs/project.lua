@@ -1,6 +1,6 @@
 local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
-    vim.notify("project_nvim not loaded", "error")
+    vim.notify("project_nvim not loaded", vim.log.levels.ERROR)
     return
 end
 

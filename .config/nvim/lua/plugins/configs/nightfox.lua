@@ -1,6 +1,6 @@
 local status_ok, nightfox = pcall(require, "nightfox")
 if not status_ok then
-    vim.notify("nightfox not loaded", "error")
+    vim.notify("nightfox not loaded", vim.log.levels.ERROR)
     return
 end
 

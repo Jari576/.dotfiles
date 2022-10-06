@@ -3,7 +3,7 @@ local status_ok, schemastore = pcall(require, "schemastore")
 if status_ok then
     schemas = schemastore.json.schemas()
 else
-    vim.notify("schemastore not available", "warn")
+    vim.notify("schemastore not available", vim.log.levels.WARN)
     schemas = {}
 end
 

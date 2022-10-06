@@ -1,6 +1,6 @@
 local status_ok, cinnamon = pcall(require, "cinnamon")
 if not status_ok then
-    vim.notify("cinnamon not loaded", "error")
+    vim.notify("cinnamon not loaded", vim.log.levels.ERROR)
     return
 end
 
@@ -14,7 +14,7 @@ cinnamon.setup({
     -- OPTIONS
     always_scroll = true, -- Scroll the cursor even when the window hasn't scrolled.
     centered = false, -- Keep cursor centered in window when using window scrolling.
-    default_delay = 7, -- The default delay (in ms) between each line when scrolling.
+    default_delay = 4, -- The default delay (in ms) between each line when scrolling.
     hide_cursor = false, -- Hide the cursor while scrolling. Requires enabling termguicolors!
     horizontal_scroll = true, -- Enable smooth horizontal scrolling when view shifts left or right.
     max_length = -1, -- Maximum length (in ms) of a command. The line delay will be

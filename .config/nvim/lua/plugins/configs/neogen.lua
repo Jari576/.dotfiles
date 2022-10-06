@@ -1,6 +1,6 @@
 local status_ok, neogen = pcall(require, "neogen")
 if not status_ok then
-	vim.notify("neogen not loaded", "error")
+	vim.notify("neogen not loaded", vim.log.levels.ERROR)
 	return
 end
 

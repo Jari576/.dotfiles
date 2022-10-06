@@ -1,6 +1,6 @@
 local status_ok, catppuccin = pcall(require, "catppuccin")
 if not status_ok then
-    vim.notify("catppuccin theme not loaded", "error")
+    vim.notify("catppuccin theme not loaded", vim.log.levels.ERROR)
     return
 end
 

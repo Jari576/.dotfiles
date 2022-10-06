@@ -1,6 +1,6 @@
 local status_ok, stabilize = pcall(require, "stabilize")
 if not status_ok then
-	vim.notify("stabilize not loaded", "error")
+	vim.notify("stabilize not loaded", vim.log.levels.ERROR)
 	return
 end
 
