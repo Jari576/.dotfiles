@@ -7,7 +7,7 @@ end
 nvim_tree.setup({
     disable_netrw = false,
     hijack_netrw = true,
-    open_on_setup = false,
+    open_on_setup = true,
     ignore_buffer_on_setup = true,
     auto_reload_on_write = true,
     open_on_tab = true,

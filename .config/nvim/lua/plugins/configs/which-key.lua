@@ -57,7 +57,7 @@ local setup = {
         }, -- min and max height of the columns
         width = {
             min = 20,
-            max = 30,
+            max = 130,
         }, -- min and max width of the columns
         spacing = 3, -- spacing between columns
         align = "left", -- align columns left, center or right
@@ -114,6 +114,8 @@ local mappings = {
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
         d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
+        r = { "<cmd>Gitsigns reset_buffer<cr>", "Reset buffer" },
+        h = { "<cmd>Gitsigns toggle_linehl<cr><cmd> Gitsigns toggle_deleted<cr>", "See changes" },
     },
     l = {
         name = "LSP",

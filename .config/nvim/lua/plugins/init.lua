@@ -308,10 +308,6 @@ return packer.startup(function(use)
     })
 
     use({
-        "nvim-treesitter/nvim-tree-docs",
-    })
-
-    use({
         "petertriho/nvim-scrollbar",
         config = get_config("scrollbar"),
     })

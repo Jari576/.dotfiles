@@ -19,10 +19,8 @@ configs.setup({
     indent = {
         enable = true,
     },
-    --[[ context_commentstring = { ]]
-    --[[     enable = true ]]
-    --[[ }, ]]
-    tree_docs = {
+    context_commentstring = {
         enable = true,
+        enable_autocmd = false,
     },
 })
