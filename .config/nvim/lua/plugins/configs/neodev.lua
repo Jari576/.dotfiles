@@ -21,16 +21,3 @@ neodev.setup({
     override = function(root_dir, options) end,
 })
 
-
-
-return neodev
-
--- return {
---     settings = {
---         Lua = {
---             diagnostics = {
---                 globals = { "vim" },
---             },
---         },
---     },
--- }

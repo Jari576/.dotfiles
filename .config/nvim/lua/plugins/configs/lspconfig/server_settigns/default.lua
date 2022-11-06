@@ -18,10 +18,10 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if cmp_status_ok then
-    cmp_nvim_lsp.update_capabilities(capabilities)
+local capabilities = {}
+local status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if status then
+    capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
 local on_attach = function(client, bufnr)
@@ -38,4 +38,3 @@ return {
     on_attach = on_attach,
     capabilities = capabilities,
 }
-

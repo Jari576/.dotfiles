@@ -40,5 +40,4 @@ for k, v in pairs(options) do
 end
 
 vim.cmd([[set iskeyword+=-]])
-vim.g.python3_host_prog = "~/.conda/envs/neovim/bin/python3"
 
