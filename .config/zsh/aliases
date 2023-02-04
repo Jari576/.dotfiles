@@ -13,7 +13,7 @@ if [ -x "$(command -v paru)" ]; then
 fi
 
 # get fastest mirrors
-alias mirror="sudo reflector --ipv4 --protocol https --country Netherlands --latest 10 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector --ipv4 --protocol https --country Netherlands,Germany,England,France --latest 10 --sort rate --verbose --save /etc/pacman.d/mirrorlist"
 
 # pipe to 'clip' to copy output
 alias clip='xclip -selection clipboard'
@@ -35,3 +35,5 @@ alias mkdir='mkdir -pv'
 [[ $TERM == "xterm-kitty" ]] && alias ssh='kitty +kitten ssh'
 
 alias nv="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+
+alias update="mirror && topgrade && initramfs"

@@ -261,10 +261,6 @@ return packer.startup({
             config = get_config("gitsigns"),
         })
 
-        -- Smooth scrolling
-        --[[ use({ ]]
-        --[[     "psliwka/vim-smoothie", ]]
-        --[[ }) ]]
         use {
             'declancm/cinnamon.nvim',
             config = get_config("cinnamon")
@@ -283,8 +279,8 @@ return packer.startup({
         })
 
         use({
-            "sunjon/Shade.nvim",
-            config = get_config("shade"),
+            "levouh/tint.nvim",
+            config = get_config("tint"),
         })
 
         use({
