@@ -123,11 +123,6 @@ return packer.startup({
         })
 
         use({
-            "luukvbaal/stabilize.nvim",
-            config = get_config("stabilize"),
-        })
-
-        use({
             "folke/which-key.nvim",
             config = get_config("which-key"),
         })
