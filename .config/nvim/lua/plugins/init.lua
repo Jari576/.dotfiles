@@ -308,10 +308,6 @@ return packer.startup({
             config = get_config("modes"),
         })
 
-
-        use({
-            'wakatime/vim-wakatime',
-        })
         use {
             'gelguy/wilder.nvim',
             config = get_config("wilder"),
