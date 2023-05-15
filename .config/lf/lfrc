@@ -1,42 +1,42 @@
 # Settings
-set anchorfind off
-set autoquit off
+set anchorfind false
+set autoquit false
 set cleaner ~/.config/lf/cleaner
-set dircache on
-# set dircounts on
-# set dirfirst on
+set dircache true
+# set dircounts true
+# set dirfirst true
 # set dironly
-set drawbox on
+set drawbox true
 set errorfmt "\033[7;31;47m%s\033[0m"
 set filesep "\n"
 set findlen 1
-set globsearch on
-set hidden on
+set globsearch true
+set hidden true
 set hiddenfiles '.*'
-set icons on
+set icons true
 set ifs ''
-set ignorecase on
-set ignoredia on
-set incfilter on
-set incsearch on
+set ignorecase true
+set ignoredia true
+set incfilter true
+set incsearch true
 set info size:time
 set infotimefmtnew 'Jan _2 15:04'
 set infotimefmtold 'Jan _2  2006'
 # set mouse
-set number on
+set number true
 set period 1
-set preview on
+set preview true
 set previewer ~/.config/lf/previewer
 set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f\033[0m"
 set ratios '1:2:3'
-set relativenumber on
+set relativenumber true
 # set reverse
 set scrolloff 20
 set shell zsh
 set shellflag '-c'
 set shellopts ''
-set smartcase on
-set smartdia on
+set smartcase true
+set smartdia true
 # set sortby 'natural'
 set tabstop 4
 # set tagfmt "\033[31m%s\033[0m"
@@ -44,8 +44,8 @@ set tempmarks ''
 set timefmt 'Mon Jan _2 15:04:05 2006'
 set truncatechar '~'
 set waitmsg 'Press any key to continue'
-set wrapscan on
-set wrapscroll off
+set wrapscan true
+set wrapscroll false
 
 # Unarchive function
 cmd unarchive ${{
@@ -95,7 +95,7 @@ cmd open ${{
     esac
 }}
 
-cmd on-cd &{{
+cmd true-cd &{{
     case $TERM in
       sun-cmd) print -Pn "\e]lLF (%~)\e\\" > /dev/tty
         ;;
@@ -103,7 +103,7 @@ cmd on-cd &{{
         ;;
     esac
 }}
-on-cd
+# on-cd
 
 cmd trash %{{
     set -f

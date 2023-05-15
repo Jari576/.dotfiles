@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "Symbols Nerd Font Mono";
     font-weight: bold;
     font-size: 16px;
     min-height: 0;
@@ -55,11 +55,7 @@ tooltip label{
 
 #custom-launch_wofi,
 #custom-lock_screen,
-#custom-light_dark,
 #custom-power_btn,
-#custom-power_profile,
-#custom-weather,
-#custom-myhyprv,
 #window,
 #cpu,
 #disk,
@@ -67,7 +63,6 @@ tooltip label{
 #memory,
 #clock,
 #battery,
-#pulseaudio,
 #network,
 #tray,
 #temperature,
@@ -84,22 +79,16 @@ tooltip label{
     border-radius: 10px 0px 0px 10px;
 }
 
-#custom-light_dark {
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;
-}
-
 #temperature.critical {
     color: #e92d4d;
 }
-
 
 #workspaces {
     padding-right: 0px;
     padding-left: 5px;
 }
 
-#custom-power_profile, #battery, #temperature{
+#battery, #temperature{
     color: #a6e3a1;
     border-left: 0px;
     border-right: 0px;
@@ -117,19 +106,3 @@ tooltip label{
     border-right: 0px;
 }
 
-#pulseaudio {
-    color: #89b4fa;
-    border-left: 0px;
-    border-right: 0px;
-}
-
-#pulseaudio.microphone {
-    color: #cba6f7;
-    border-left: 0px;
-    border-right: 0px;
-}
-
-#battery {
-    color: #a6e3a1;
-    border-left: 0px;
-}
