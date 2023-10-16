@@ -7,9 +7,10 @@
     "gtk-layer-shell": true,
     "height": 20,
     "modules-left": [
-        "custom/launch_wofi",
-        "custom/power_btn",
-        "custom/lock_screen",
+        // "custom/launch_wofi",
+        // "custom/power_btn",
+        // "custom/lock_screen",
+        // "hyprland/workspaces",
         "wlr/workspaces",
         "wlr/taskbar"
     ],
@@ -18,32 +19,48 @@
         "memory",
         "temperature",
         "battery",
-        // "wireplumber",
+        "wireplumber",
         "backlight",
         "tray",
         "custom/updates",
         "clock"
     ],
     "include": [],
-    "custom/launch_wofi": {
-        "format": "",
-        "on-click": "pkill wofi || wofi -n -c ~/.config/wofi/config-bmenu",
-        "tooltip": false
-    },
-    "custom/power_btn": {
-        "format": "",
-        "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
-        "tooltip": false
-    },
-    "custom/lock_screen": {
-        "format": "",
-        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
-        "tooltip": false
-    },
+    // "custom/launch_wofi": {
+    //     "format": "",
+    //     "on-click": "pkill wofi || wofi -n -c ~/.config/wofi/config-bmenu",
+    //     "tooltip": false
+    // },
+    // "custom/power_btn": {
+    //     "format": "",
+    //     "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
+    //     "tooltip": false
+    // },
+    // "custom/lock_screen": {
+    //     "format": "",
+    //     "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+    //     "tooltip": false
+    // },
+    // "hyprland/workspaces": {
+    //     "active-only": true,
+    //     "all-outputs": false,
+    //     "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "active": "",
+    //         "default": ""
+    //     },
+    // },
     "wlr/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
         "persistent_workspaces": {
             "1": [],
             "2": [],
@@ -55,18 +72,18 @@
             "8": [],
             "9": [],
             "10": []
-        }
+        },
     },
     "wlr/taskbar": {
         "format": "{icon}{name}",
         "icon-size": 16,
-        "all-outputs": true,
+        "all-outputs": false,
         "tooltip-format": "{title}",
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
             "wofi"
-         ]
+        ]
     },
     "cpu": {
         "interval": 1,
@@ -75,11 +92,10 @@
         "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
     },
     "memory": {
-        "interval": 30,
+        "interval": 5,
         "format": " {used:0.1f}GiB",
         "max-length": 10,
-        "tooltip": true,
-        "tooltip-format": "Memory - {used:0.1f}GB used",
+        "tooltip": false,
         "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
     },
     "temperature": {
@@ -99,52 +115,24 @@
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
-        "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""]
     },
     "wireplumber": {
-        "format": "{volume}% {icon}",
-        "format-muted": "",
-        "on-click": "helvum",
-        "format-icons": ["", "", ""]
-    },
-    "audio": {
-        "format": "{icon}",
+        "format": "{icon} {volume}%",
         "format-muted": "",
+        "on-click": "helvum",
+        "format-icons": ["", "", ""],
         "on-click": "~/.config/waybar/scripts/volume --toggle",
         "on-click-right": "pavucontrol",
         "on-scroll-up": "~/.config/waybar/scripts/volume --inc",
         "on-scroll-down": "~/.config/waybar/scripts/volume --dec",
-        "scroll-step": 1,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "tooltip": true,
-        "tooltip-format": "{icon} at {volume}%"
-    },
-    "microphone": {
-        "format": "{format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "on-click": "~/.config/waybar/scripts/volume --toggle-mic",
-        "on-click-right": "pavucontrol",
-        "on-scroll-up": "~/.config/waybar/scripts/volume --mic-inc",
-        "on-scroll-down": "~/.config/waybar/scripts/volume --mic-dec",
-        "scroll-step": 1,
-        "tooltip": true,
-        "tooltip-format": " at {volume}%"
+        "scroll-step": 1
     },
     "backlight": {
         "device": "intel_backlight",
-        "format": "{icon}",
-        "format-alt-click": "click-right",
-        "format-alt": "{icon} {percent}%",
-        "format-icons": ["", "", ""],
+        "format": "{icon} {percent}%",
+        "format-icons": ["☼"],
+    	"interval": 50,
         "on-scroll-up": "~/.config/waybar/scripts/brightness --inc",
         "on-scroll-down": "~/.config/waybar/scripts/brightness --dec"
     },
@@ -163,5 +151,12 @@
         "format": "{:%I:%M %p}",
         "tooltip": true,
         "tooltip-format": "{: %A, %B %e %Y}"
+    },
+     "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
     }
 }

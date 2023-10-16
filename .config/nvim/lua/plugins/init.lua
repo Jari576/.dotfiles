@@ -120,6 +120,8 @@ return packer.startup({
         use({
             "lukas-reineke/indent-blankline.nvim",
             config = get_config("indent-blankline"),
+            requires = { "nvim-treesitter/nvim-treesitter" },
+            
         })
 
         use({
@@ -179,6 +181,7 @@ return packer.startup({
         use({
             "j-hui/fidget.nvim",
             config = get_config("fidget"),
+            tag = "legacy"
         })
         use({
             "folke/neodev.nvim",
