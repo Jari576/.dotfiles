@@ -1,4 +1,2 @@
-require "options"
-require "plugins"
-require "keymaps"
-require "autocommands"
+require("jari.core")
+require("jari.lazy")

@@ -109,8 +109,8 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 's', api.node.run.system, opts('Run System'))
   vim.keymap.set('n', 'q', api.tree.close, opts('Close'))
   vim.keymap.set('n', 'g?', api.tree.toggle_help, opts('Help'))
-
 end
+
 nvim_tree.setup({
     auto_reload_on_write = true,
     create_in_closed_folder = false,
