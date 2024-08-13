@@ -60,3 +60,5 @@ bindkey '^e' editCurDir
 
 bindkey -s '^z' "^Uzi^M"
 bindkey -s '^P' "^Usysz^M"
+
+source "$ZDOTDIR/application_specific/keybinds/fzf"

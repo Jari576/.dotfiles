@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source "$ZDOTDIR/key-bindings.zsh"
-
 # add, commit and push
 function send () {
     git add -A

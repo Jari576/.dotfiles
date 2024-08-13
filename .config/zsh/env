@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PLUGINS_DIRECTORY=$ZDOTDIR/installed_plugins
-fpath=($PLUGINS_DIRECTORY $fpath)
+fpath=($PLUGINS_DIRECTORY "$ZDOTDIR/application_specific/completions" $fpath)
 # fpath=("$ZDOTDIR/plugin_functions" "$ZDOTDIR/functions" $fpath)
 # autoload -U $fpath[1]/*(.:t)
 
@@ -18,3 +18,4 @@ fi
 export TASKRC=~/.config/task/taskrc
 export _ZO_FZF_OPTS="--preview='exa -alh --group-directories-first' --reverse --no-sort --select-1 --exit-0 --bind=ctrl-z:ignore"
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

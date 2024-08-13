@@ -1,6 +1,11 @@
 #!/bin/sh
 
-source "$ZDOTDIR/completion.zsh"
+# for file in $ZDOTDIR/application_specific/completions/*; do 
+#     source "$file"
+# done
+source "$ZDOTDIR/application_specific/completions/fzf"
+source "$ZDOTDIR/application_specific/completions/pipx"
+source "$ZDOTDIR/application_specific/completions/gcloud"
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
