@@ -1,7 +1,7 @@
 #!/bin/sh
 
 typeset -U PATH path
-path=("$HOME/.local/bin" "$(ruby -e 'puts Gem.user_dir')/bin" "$HOME/.cargo/bin" "$HOME/go/bin" "$HOME/.deno/bin" "$path[@]")
+path=("$HOME/.local/bin" "$(ruby -e 'puts Gem.user_dir')/bin" "$HOME/.cargo/bin" "$HOME/go/bin" "$HOME/.deno/bin" "$path[@]" "/usr/local/go/bin")
 export PATH
 
 export ZDOTDIR="$HOME/.config/zsh"
@@ -12,3 +12,5 @@ export TERMINAL=kitty
 
 export LIBVA_DRIVER_NAME="vdpau"
 export VDPAU_DRIVER="nvidia"
+. "$HOME/.cargo/env"
+
