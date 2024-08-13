@@ -1,5 +1,8 @@
 return {
 	"folke/which-key.nvim",
+	dependencies = {
+        "echasnovski/mini.icons"
+    },
 	event = "VeryLazy",
 	init = function()
 		vim.o.timeout = true
@@ -127,7 +130,7 @@ return {
 				r = { "<cmd>Gitsigns reset_buffer<cr>", "Reset buffer" },
 				h = { "<cmd>Gitsigns toggle_linehl<cr><cmd> Gitsigns toggle_deleted<cr>", "See changes" },
 			},
-			L = { "<CMD>Lazy<CR>", "Close Buffer" },
+			L = { "<CMD>Lazy<CR>", "Lazy" },
 			l = {
 				name = "LSP",
 				a = {

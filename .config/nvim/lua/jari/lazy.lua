@@ -17,7 +17,7 @@ require("lazy").setup({ { import = "jari.plugins" }, { import = "jari.plugins.ls
 	},
 	checker = {
 		enabled = true,
-		notify = true,
+		notify = false,
 	},
 	change_detection = {
 		notify = false,

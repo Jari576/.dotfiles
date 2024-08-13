@@ -28,6 +28,8 @@ return {
             -- list of servers for mason to install
             ensure_installed = {
                 "tsserver",
+                "robotframework_ls",
+                "angularls",
                 "html",
                 "cssls",
                 "tailwindcss",
