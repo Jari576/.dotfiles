@@ -17,6 +17,6 @@ source "$ZDOTDIR/nvm_init"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-eval $(keychain --eval --quiet --confhost --inherit any)
+# eval "$(keychain --eval --quiet --confallhosts)"
 eval $(thefuck --alias)
 
