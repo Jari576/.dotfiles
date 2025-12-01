@@ -1,7 +1,7 @@
 # Settings
 set anchorfind false
 set autoquit false
-set cleaner ~/.config/lf/cleaner
+# set cleaner ~/.config/lf/cleaner
 set dircache true
 # set dircounts true
 # set dirfirst true
@@ -26,7 +26,8 @@ set infotimefmtold 'Jan _2  2006'
 set number true
 set period 1
 set preview true
-set previewer ~/.config/lf/previewer
+# set previewer ~/.config/lf/previewer
+set previewer ~/.nix-profile/bin/pistol
 set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m\033[1m%f\033[0m"
 set ratios '1:2:3'
 set relativenumber true
