@@ -75,16 +75,16 @@ return {
         end
 
         -- configure html server
-        lspconfig["html"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["html"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
         -- configure typescript server with plugin
-        lspconfig["tsserver"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["tsserver"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
         -- lspconfig["angularls"].setup({
             -- filetypes = {
@@ -97,78 +97,78 @@ return {
         -- })
 
         -- configure css server
-        lspconfig["cssls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["cssls"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
         -- configure tailwindcss server
-        lspconfig["tailwindcss"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["tailwindcss"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
         -- configure svelte server
-        lspconfig["svelte"].setup({
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                on_attach(client, bufnr)
+        -- lspconfig["svelte"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = function(client, bufnr)
+                -- on_attach(client, bufnr)
 
-                vim.api.nvim_create_autocmd("BufWritePost", {
-                    pattern = { "*.js", "*.ts" },
-                    callback = function(ctx)
-                        if client.name == "svelte" then
-                            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-                        end
-                    end,
-                })
-            end,
-        })
+                -- vim.api.nvim_create_autocmd("BufWritePost", {
+                    -- pattern = { "*.js", "*.ts" },
+                    -- callback = function(ctx)
+                        -- if client.name == "svelte" then
+                            -- client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+                        -- end
+                    -- end,
+                -- })
+            -- end,
+        -- })
 
         -- configure prisma orm server
-        lspconfig["prismals"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["prismals"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
-        lspconfig["yamlls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = { "yml", "yaml" },
-        })
+        -- lspconfig["yamlls"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+            -- filetypes = { "yml", "yaml" },
+        -- })
 
         -- configure graphql language server
-        lspconfig["graphql"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        })
+        -- lspconfig["graphql"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+            -- filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+        -- })
 
         -- configure python server
-        lspconfig["pyright"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        -- lspconfig["pyright"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+        -- })
 
         -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = { -- custom settings for lua
-                Lua = {
+        -- lspconfig["lua_ls"].setup({
+            -- capabilities = capabilities,
+            -- on_attach = on_attach,
+            -- settings = { -- custom settings for lua
+                -- Lua = {
                     -- make the language server recognize "vim" global
-                    diagnostics = {
-                        globals = { "vim" },
-                    },
-                    workspace = {
+                    -- diagnostics = {
+                        -- globals = { "vim" },
+                    -- },
+                    -- workspace = {
                         -- make language server aware of runtime files
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
-                    },
-                },
-            },
-        })
+                        -- library = {
+                            -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                            -- [vim.fn.stdpath("config") .. "/lua"] = true,
+                        -- },
+                    -- },
+                -- },
+            -- },
+        -- })
     end,
 }

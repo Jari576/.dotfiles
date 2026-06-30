@@ -194,4 +194,4 @@ _poetry_38b5d61800c9311c_complete()
 }
 
 _poetry_38b5d61800c9311c_complete "$@"
-compdef _poetry_38b5d61800c9311c_complete /home/TriOpSys.net/jbervoets/.local/pipx/venvs/poetry/bin/poetry
+compdef _poetry_38b5d61800c9311c_complete /home/jari/.local/pipx/venvs/poetry/bin/poetry

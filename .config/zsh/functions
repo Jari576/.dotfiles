@@ -1,11 +1,105 @@
 #!/bin/sh
 
+
+##################################
+############## git ###############
+##################################
 # add, commit and push
 function send () {
-    git add -A
-    git commit -m "$1" || git commit && git push
+    git fetch --prune && git push -u origin $(git branch --show-current)
+    UPTODATE=$(git status | grep 'Your branch is up to date with')
+    if [[ -n $UPTODATE ]]; then
+        git add -A && (git commit -m "$1" || git commit) && git push
+    else
+        echo "Branch is not up to date with remote"
+    fi
 }
 
+function prune-git-branches () {
+    echo "Updating remote references"
+    git fetch --prune
+    GONE=$(git branch -vv | grep --invert-match '*' | grep 'gone]' | awk '{print $1}')
+    GONE_COUNT=$(echo "$GONE" | wc --words)
+    if [ "$GONE_COUNT" -gt "0" ]; then
+        echo "$GONE_COUNT branch(es) no longer in remote:"
+        if [ "$LOCAL_COUNT" -gt "1" ]; then
+            echo "$GONE_COUNT branches no longer in remote:"
+        else
+            echo "$GONE_COUNT branch no longer in remote:"
+        fi
+        echo "$GONE"
+        printf "Remove?"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y )
+                    echo "$GONE" | xargs git branch -D
+                    break;;
+                * ) 
+                    break;;
+            esac
+        done
+    else
+        echo "No local branches found that no longer exist on remote"
+    fi
+    LOCAL=$(git branch -vv | grep --invert-match '*' | grep --invert-match '\[origin\/' | awk '{print $1}')
+    LOCAL_COUNT=$(echo "$LOCAL" | wc --words)
+    if [ "$LOCAL_COUNT" -gt "0" ]; then
+        if [ "$LOCAL_COUNT" -gt "1" ]; then
+            echo "$LOCAL_COUNT local-only branches found:"
+        else
+            echo "$LOCAL_COUNT local-only branch found:"
+        fi
+        echo "$LOCAL"
+        echo "Remove?"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y )
+                    echo "$LOCAL" | xargs git branch -D
+                    break;;
+                * )
+                    break;;
+            esac
+        done
+    else
+        echo "No local-only branches found"
+    fi
+}
+##################################
+############# maven ##############
+##################################
+function sbom () {
+    SBOM="$(mvnd exec:exec@generate-sbom-maven-sources exec:exec@generate-sbom-sources exec:exec@generate-sbom-docker exec:exec@scan-sbom-sources exec:exec@scan-sbom-docker --fail-at-end)"
+    TRIMMED=$(echo "$SBOM" | grep --extended-regexp 'NAME\s+INSTALLED\s+FIXED\-IN\s+TYPE\s+VULNERABILITY\s+SEVERITY|---\sexec:.*:exec\s\(scan\-sbom\-sources\)\s@\s.*\s---|Critical|High')
+    USEFUL_PART=$(echo "$TRIMMED" | awk '$NF == "---" { printf "\n\n%50s\n", $(NF-1) }; $NF != "---" {printf "%-30s %24s %10s\n", $3, $(NF-1), $NF}')
+    echo "$USEFUL_PART"
+    GRYPE=$(echo "$USEFUL_PART" | grep --extended-regexp --invert-match 'NAME\s+VULNERABILITY\s+SEVERITY' | awk 'NF > 1 { gsub("@","", $1); print "  - vulnerability:", $2, "\n    package.name:", $1}')
+    GRYPE_LINE_COUNT=$(echo "$GRYPE" | wc --words)
+    if [ ! -f "./.grype.yaml" ]; then
+        echo "No .grype.yaml found"
+        echo "Creating .grype.yaml"
+        echo "ignore:" >> ./.grype.yaml
+    else
+        echo ".grype.yaml found"
+    fi
+    if [ "$GRYPE_LINE_COUNT" -gt "0" ]; then
+        echo "Add vulnerabilities to grype?"
+        select strictreply in "Yes" "No"; do
+            relaxedreply=${strictreply:-$REPLY}
+            case $relaxedreply in
+                Yes | yes | y )
+                    echo "Writing vulnerabilities to grype"
+                    echo "$GRYPE" >> ./.grype.yaml 
+                    break;;
+                * )
+                    break;;
+            esac
+        done
+    fi
+}
+
+##################################
 # terminal spotify client
 function spot () {
     # launch spotifyd if it's not running

@@ -9,8 +9,12 @@ _comp_options+=(globdots) # Include hidden files.
 #     source "$file"
 # done
 source "$ZDOTDIR/application_specific/completions/fzf"
+source "$ZDOTDIR/application_specific/completions/mvnd"
 # source "$ZDOTDIR/application_specific/completions/pipx"
 # source "$ZDOTDIR/application_specific/completions/gcloud"
+
+# The next line enables shell command completion for gcloud.
+[ -f '$HOME/.local/share/google-cloud-sdk/completion.zsh.inc' ] && . '$HOME/.local/share/google-cloud-sdk/completion.zsh.inc'
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"

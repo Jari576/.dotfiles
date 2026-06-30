@@ -41,3 +41,11 @@ alias nv="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSyn
 alias update="mirror && topgrade && initramfs"
 
 alias fixaudio="systemctl --user restart pipewire.service pipewire-pulse.service"
+
+# maven
+alias sbom-docker="mvn exec:exec@generate-sbom-docker exec:exec@scan-sbom-docker --fail-at-end | grep --extended-regexp 'NAME*INSTALLED*FIXED-IN*TYPE*VULNERABILITY*SEVERITY|Critical|High'"
+alias mvn-get-updates="mvnd -DprocessDependencyManagement=false -DshowVersionless=false versions:display-parent-updates versions:display-dependency-updates versions:display-property-updates versions:display-plugin-updates | grep --extended-regexp 'display-.*-updates|->'"
+# alias mvn-get-updates="mvnd -DprocessDependencyManagement=false versions:display-parent-updates versions:display-dependency-updates versions:display-property-updates versions:display-plugin-updates | grep --extended-regexp 'display-.*-updates|->'"
+# alias mvn-get-minor-updates="mvnd -DprocessDependencyManagement=false -DallowMajorUpdates=false versions:display-parent-updates versions:display-dependency-updates versions:display-property-updates versions:display-plugin-updates | grep --extended-regexp 'display-.*-updates|->'"
+alias mvn-get-minor-updates="mvnd -DprocessDependencyManagement=false -DallowMajorUpdates=false -DshowVersionless=false versions:display-parent-updates versions:display-dependency-updates versions:display-property-updates versions:display-plugin-updates | grep --extended-regexp 'display-.*-updates|->'"
+

@@ -21,10 +21,7 @@ source "$ZDOTDIR/nvm_init"
 [ -x "$(command -v thefuck)" ] && eval "$(thefuck --alias)"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/TriOpSys.net/jbervoets/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/TriOpSys.net/jbervoets/.local/share/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/TriOpSys.net/jbervoets/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/TriOpSys.net/jbervoets/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+[ -f '$HOME/.local/share/google-cloud-sdk/path.zsh.inc' ] && . '$HOME/.local/share/google-cloud-sdk/path.zsh.inc'
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
